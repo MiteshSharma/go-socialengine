@@ -1,0 +1,156 @@
+!<arch>
+__.PKGDEF       0           0     0     644     9963      `
+go object darwin amd64 go1.5.3 X:none
+build id "0bf24def47970a647253cbea5fa11243bf114e51"
+
+$$
+package userdetail
+	import runtime "runtime"
+	import model "model"
+	import time "time"
+	type @"time".zone struct { @"time".name string; @"time".offset int; @"time".isDST bool }
+	type @"time".zoneTrans struct { @"time".when int64; @"time".index uint8; @"time".isstd bool; @"time".isutc bool }
+	type @"time".Location struct { @"time".name string; @"time".zone []@"time".zone; @"time".tx []@"time".zoneTrans; @"time".cacheStart int64; @"time".cacheEnd int64; @"time".cacheZone *@"time".zone }
+	func (@"time".lÂ·2 *@"time".Location "esc:0x22") String () (? string)
+	func (@"time".lÂ·2 *@"time".Location "esc:0x1") @"time".firstZoneUsed () (? bool)
+	func (@"time".lÂ·2 *@"time".Location "esc:0x12") @"time".get () (? *@"time".Location)
+	func (@"time".lÂ·6 *@"time".Location "esc:0x32") @"time".lookup (@"time".secÂ·7 int64) (@"time".nameÂ·1 string, @"time".offsetÂ·2 int, @"time".isDSTÂ·3 bool, @"time".startÂ·4 int64, @"time".endÂ·5 int64)
+	func (@"time".lÂ·2 *@"time".Location "esc:0x1") @"time".lookupFirstZone () (? int)
+	func (@"time".lÂ·4 *@"time".Location "esc:0x1") @"time".lookupName (@"time".nameÂ·5 string "esc:0x1", @"time".unixÂ·6 int64) (@"time".offsetÂ·1 int, @"time".isDSTÂ·2 bool, @"time".okÂ·3 bool)
+	type @"time".Duration int64
+	func (@"time".dÂ·2 @"time".Duration) Hours () (? float64) { var @"time".hourÂ·3 @"time".Duration; ; @"time".hourÂ·3 = @"time".dÂ·2 / @"time".Duration(0x34630b8a000); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0x34630b8a000); return float64(@"time".hourÂ·3) + float64(@"time".nsecÂ·4) * 8190022623310637111963488201822504381538623676021880892417778544696899264837610290203272971060556344039023584360473938041055625214280336402169897364226048p-553 }
+	func (@"time".dÂ·2 @"time".Duration) Minutes () (? float64) { var @"time".minÂ·3 @"time".Duration; ; @"time".minÂ·3 = @"time".dÂ·2 / @"time".Duration(0xdf8475800); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0xdf8475800); return float64(@"time".minÂ·3) + float64(@"time".nsecÂ·4) * 7678146209353722106395056769533233877065564876941352542109479049699919628723768656821910653339403201031675627614471533358284117434246264392176261853609984p-547 }
+	func (@"time".dÂ·2 @"time".Duration) Nanoseconds () (? int64) { return int64(@"time".dÂ·2) }
+	func (@"time".dÂ·2 @"time".Duration) Seconds () (? float64) { var @"time".secÂ·3 @"time".Duration; ; @"time".secÂ·3 = @"time".dÂ·2 / @"time".Duration(0x3b9aca00); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0x3b9aca00); return float64(@"time".secÂ·3) + float64(@"time".nsecÂ·4) * 7198262071269114660816079141112770740375861891461678802759824945047098083990024106014198994535558872472104883612039846078596891298747423852523262413111296p-541 }
+	func (@"time".dÂ·2 @"time".Duration) String () (? string)
+	type @"time".Month int
+	func (@"time".mÂ·2 @"time".Month) String () (? string) { return @"time".months[@"time".mÂ·2 - @"time".Month(0x1)] }
+	type @"time".Weekday int
+	func (@"time".dÂ·2 @"time".Weekday) String () (? string) { return @"time".days[@"time".dÂ·2] }
+	type @"time".Time struct { @"time".sec int64; @"time".nsec int32; @"time".loc *@"time".Location }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Add (@"time".dÂ·3 @"time".Duration) (? @"time".Time) { @"time".tÂ·2.@"time".sec += int64(@"time".dÂ·3 / @"time".Duration(0x3b9aca00)); var @"time".nsecÂ·4 int32; ; @"time".nsecÂ·4 = int32(@"time".tÂ·2.@"time".nsec) + int32(@"time".dÂ·3 % @"time".Duration(0x3b9aca00)); if @"time".nsecÂ·4 >= 0x3b9aca00 { @"time".tÂ·2.@"time".sec++; @"time".nsecÂ·4 -= 0x3b9aca00 } else { if @"time".nsecÂ·4 < 0x0 { @"time".tÂ·2.@"time".sec--; @"time".nsecÂ·4 += 0x3b9aca00 } }; @"time".tÂ·2.@"time".nsec = @"time".nsecÂ·4; return @"time".tÂ·2 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") AddDate (@"time".yearsÂ·3 int, @"time".monthsÂ·4 int, @"time".daysÂ·5 int) (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") After (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec > @"time".uÂ·3.@"time".sec || @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec > @"time".uÂ·3.@"time".nsec }
+	func (@"time".tÂ·2 @"time".Time "esc:0x9") AppendFormat (@"time".bÂ·3 []byte "esc:0x1a", @"time".layoutÂ·4 string "esc:0x9") (? []byte)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Before (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec < @"time".uÂ·3.@"time".sec || @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec < @"time".uÂ·3.@"time".nsec }
+	func (@"time".tÂ·4 @"time".Time "esc:0x1") Clock () (@"time".hourÂ·1 int, @"time".minÂ·2 int, @"time".secÂ·3 int)
+	func (@"time".tÂ·4 @"time".Time "esc:0x1") Date () (@"time".yearÂ·1 int, @"time".monthÂ·2 @"time".Month, @"time".dayÂ·3 int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Day () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Equal (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec == @"time".uÂ·3.@"time".nsec }
+	func (@"time".tÂ·2 @"time".Time "esc:0x9") Format (@"time".layoutÂ·3 string "esc:0x9") (? string)
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") GobDecode (@"time".dataÂ·3 []byte "esc:0x1") (? error)
+	func (@"time".tÂ·3 @"time".Time "esc:0x1") GobEncode () (? []byte, ? error)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Hour () (? int)
+	func (@"time".tÂ·3 @"time".Time "esc:0x1") ISOWeek () (@"time".yearÂ·1 int, @"time".weekÂ·2 int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") In (@"time".locÂ·3 *@"time".Location "esc:0x12") (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") IsZero () (? bool) { return @"time".tÂ·2.@"time".sec == 0x0 && @"time".tÂ·2.@"time".nsec == 0x0 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Local () (? @"time".Time) { @"time".tÂ·2.@"time".loc = @"time".Local; return @"time".tÂ·2 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Location () (? *@"time".Location) { var @"time".lÂ·3 *@"time".Location; ; @"time".lÂ·3 = @"time".tÂ·2.@"time".loc; if @"time".lÂ·3 == nil { @"time".lÂ·3 = @"time".UTC }; return @"time".lÂ·3 }
+	func (@"time".tÂ·3 @"time".Time "esc:0x1") MarshalBinary () (? []byte, ? error)
+	func (@"time".tÂ·3 @"time".Time "esc:0x9") MarshalJSON () (? []byte, ? error)
+	func (@"time".tÂ·3 @"time".Time "esc:0x9") MarshalText () (? []byte, ? error)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Minute () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Month () (? @"time".Month)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Nanosecond () (? int) { return int(@"time".tÂ·2.@"time".nsec) }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Round (@"time".dÂ·3 @"time".Duration) (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Second () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x9") String () (? string)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Sub (@"time".uÂ·3 @"time".Time "esc:0x1") (? @"time".Duration)
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Truncate (@"time".dÂ·3 @"time".Duration) (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") UTC () (? @"time".Time) { @"time".tÂ·2.@"time".loc = @"time".UTC; return @"time".tÂ·2 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Unix () (? int64) { return @"time".tÂ·2.@"time".sec + -0xe7791f700 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") UnixNano () (? int64) { return (@"time".tÂ·2.@"time".sec + -0xe7791f700) * 0x3b9aca00 + int64(@"time".tÂ·2.@"time".nsec) }
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalBinary (@"time".dataÂ·3 []byte "esc:0x1") (? error)
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalJSON (@"time".dataÂ·3 []byte "esc:0x1") (@"time".errÂ·1 error)
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalText (@"time".dataÂ·3 []byte "esc:0x1") (@"time".errÂ·1 error)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Weekday () (? @"time".Weekday)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Year () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") YearDay () (? int)
+	func (@"time".tÂ·3 @"time".Time "esc:0x32") Zone () (@"time".nameÂ·1 string, @"time".offsetÂ·2 int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") @"time".abs () (? uint64)
+	func (@"time".tÂ·5 @"time".Time "esc:0x1") @"time".date (@"time".fullÂ·6 bool) (@"time".yearÂ·1 int, @"time".monthÂ·2 @"time".Month, @"time".dayÂ·3 int, @"time".ydayÂ·4 int)
+	func (@"time".tÂ·4 @"time".Time "esc:0x32") @"time".locabs () (@"time".nameÂ·1 string, @"time".offsetÂ·2 int, @"time".absÂ·3 uint64)
+	type @"".UserDetail struct { UserId int "gorm:\"primary_key\""; DeviceId string "sql:\"DEFAULT:NULL\""; AppVersion string "sql:\"DEFAULT:NULL\""; LocaleCode string "sql:\"DEFAULT:NULL\""; ConnectionType string "sql:\"DEFAULT:NULL\""; Manufacturer string "sql:\"DEFAULT:NULL\""; DeviceMode string "sql:\"DEFAULT:NULL\""; AndroidId string "sql:\"DEFAULT:NULL\""; CareerName string "sql:\"DEFAULT:NULL\""; Ip string "sql:\"DEFAULT:NULL\""; Mac string "sql:\"DEFAULT:NULL\""; UtmSource string "sql:\"DEFAULT:NULL\""; UtmMedium string "sql:\"DEFAULT:NULL\""; UtmContent string "sql:\"DEFAULT:NULL\""; UtmCampaign string "sql:\"DEFAULT:NULL\""; UtmTerm string "sql:\"DEFAULT:NULL\""; CreatedAt @"time".Time; UpdatedAt @"time".Time }
+	func @"".Create (@"".user_idÂ·1 int, @"".device_idÂ·2 string, @"".app_versionÂ·3 string, @"".locale_codeÂ·4 string, @"".connection_typeÂ·5 string, @"".manufacturerÂ·6 string, @"".device_modelÂ·7 string, @"".android_idÂ·8 string, @"".carrier_nameÂ·9 string, @"".ipÂ·10 string, @"".macÂ·11 string, @"".utm_sourceÂ·12 string, @"".utm_mediumÂ·13 string, @"".utm_contentÂ·14 string, @"".utm_campaignÂ·15 string, @"".utm_termÂ·16 string)
+	func @"".init ()
+	var @"time".months [12]string
+	var @"time".days [7]string
+	var @"time".Local *@"time".Location
+	var @"time".UTC *@"time".Location
+
+$$
+ _go_.o          0           0     0     644     16923     `
+go object darwin amd64 go1.5.3 X:none
+
+!
+  go13ldmodel.atime.a ş"".Create  À  ¬eH‹%    H„$ğşÿÿH;A†ñ  Hì  H    H‰$è    H‹\$H‰\$ è    H‹$H‰\$P‹\$‰\$XH‹\$H‰\$`è    H‹,$‹T$H‹D$H5    H|$hè    H‹œ$˜  H‰\$hH‹œ$   H‰\$pH‹œ$¨  H‰\$xH‹œ$°  H‰œ$€   H‹œ$¸  H‰œ$ˆ   H‹œ$À  H‰œ$   H‹œ$È  H‰œ$˜   H‹œ$Ğ  H‰œ$    H‹œ$Ø  H‰œ$¨   H‹œ$à  H‰œ$°   H‹œ$è  H‰œ$¸   H‹œ$ğ  H‰œ$À   H‹œ$ø  H‰œ$È   H‹œ$   H‰œ$Ğ   H‹œ$  H‰œ$Ø   H‹œ$  H‰œ$à   H‹œ$  H‰œ$è   H‹œ$   H‰œ$ğ   H‹œ$(  H‰œ$ø   H‹œ$0  H‰œ$   H‹œ$8  H‰œ$  H‹œ$@  H‰œ$  H‹œ$H  H‰œ$  H‹œ$P  H‰œ$   H‹œ$X  H‰œ$(  H‹œ$`  H‰œ$0  H‹œ$h  H‰œ$8  H‹œ$p  H‰œ$@  H‹œ$x  H‰œ$H  H‹œ$€  H‰œ$P  H‹œ$ˆ  H‰œ$X  H‹\$PH‰œ$`  ‹\$X‰œ$h  H‹\$`H‰œ$p  H‰l$8H‰¬$x  ‰T$@‰”$€  H‰D$HH‰„$ˆ  H‹\$ Hl$hH‰\$H‰l$H-    H‰,$è    H‹L$ H‹    H‰$H    H‰D$(H‰D$H‰L$0H‰L$è    HÄ  Ãè    éêüÿÿ
+      J  $type."".UserDetail   \
+  "runtime.newobject   z
+  time.Now   º
+  time.Now   â  """.statictmp_0005   ö
+ô  runtime.duffcopy     $type."".UserDetail    
+  (runtime.typedmemmove   ¸  model.Db   Î  &type.*"".UserDetail   €
+  Fgithub.com/jinzhu/gorm.(*DB).Create   š
+  0runtime.morestack_noctxt   ğ   ("".autotmp_0003 Ï$type."".UserDetail "".autotmp_0002 ¯type.time.Time "".autotmp_0001 ÿtype.time.Time "".&user_detail ß&type.*"".UserDetail "".utm_term Ğtype.string "".utm_campaign °type.string "".utm_content type.string "".utm_medium ğtype.string "".utm_source Ğtype.string "".mac °type.string 
+"".ip type.string "".carrier_name ğtype.string "".android_id Ğtype.string "".device_model °type.string "".manufacturer type.string $"".connection_type ptype.string "".locale_code Ptype.string "".app_version 0type.string "".device_id type.string "".user_id  type.int " éŸ    $@"( #æ*0-  - ó0! TgclocalsÂ·b78c9ff012ae009395460ad05a7a8a3f TgclocalsÂ·014ab8b286467dfcb2a39208605b0cca   ”/Users/mitesh/Personal/bitbucket/go-web/src/model/userdetail/userdetail.goş"".init     eH‹%    H;av9¶    €û t¶    €ûuÃè    Æ    è    è    Æ    Ãè    ë±
+      $  "".initdoneÂ·   <  "".initdoneÂ·   R
+  "runtime.throwinit   b "".initdoneÂ·   n
+  model.init   x
+  time.init   „ "".initdoneÂ·   ’
+  0runtime.morestack_noctxt        P P nP 
+ (( TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   ”/Users/mitesh/Personal/bitbucket/go-web/src/model/userdetail/userdetail.goş0type..hash."".UserDetail €  üeH‹%    H;a†!  Hƒì H‹\$(H‰$Hƒ<$ „ı  H‹\$0H‰\$HÇD$   è    H‹D$H‹\$(H‰$Hƒ<$ „À  Hƒ$H‰D$0H‰D$è    H‹D$H‹\$(H‰$Hƒ<$ „‡  Hƒ$H‰D$0H‰D$è    H‹D$H‹\$(H‰$Hƒ<$ „N  Hƒ$(H‰D$0H‰D$è    H‹D$H‹\$(H‰$Hƒ<$ „  Hƒ$8H‰D$0H‰D$è    H‹D$H‹\$(H‰$Hƒ<$ „Ü  Hƒ$HH‰D$0H‰D$è    H‹D$H‹\$(H‰$Hƒ<$ „£  Hƒ$XH‰D$0H‰D$è    H‹D$H‹\$(H‰$Hƒ<$ „j  Hƒ$hH‰D$0H‰D$è    H‹D$H‹\$(H‰$Hƒ<$ „1  Hƒ$xH‰D$0H‰D$è    H‹D$H‹\$(H‰$Hƒ<$ „ø  H$ˆ   H‰D$0H‰D$è    H‹D$H‹\$(H‰$Hƒ<$ „¼  H$˜   H‰D$0H‰D$è    H‹D$H‹\$(H‰$Hƒ<$ „€  H$¨   H‰D$0H‰D$è    H‹D$H‹\$(H‰$Hƒ<$ „D  H$¸   H‰D$0H‰D$è    H‹D$H‹\$(H‰$Hƒ<$ „  H$È   H‰D$0H‰D$è    H‹D$H‹\$(H‰$Hƒ<$ „Ì   H$Ø   H‰D$0H‰D$è    H‹D$H‹\$(H‰$Hƒ<$ „   H$è   H‰D$0H‰D$è    H‹D$H‹\$(H‰$Hƒ<$ t[H$ø   H‰D$0H‰D$è    H‹D$H‹\$(H‰$Hƒ<$ t&H$  H‰D$0H‰D$è    H‹\$H‰\$8HƒÄ Ã‰%    ëÑ‰%    ëœ‰%    édÿÿÿ‰%    é(ÿÿÿ‰%    éìşÿÿ‰%    é°şÿÿ‰%    étşÿÿ‰%    é8şÿÿ‰%    éüıÿÿ‰%    éÃıÿÿ‰%    éŠıÿÿ‰%    éQıÿÿ‰%    éıÿÿ‰%    éßüÿÿ‰%    é¦üÿÿ‰%    émüÿÿ‰%    é4üÿÿ‰%    é÷ûÿÿè    éÂûÿÿ(
+      ~
+  runtime.memhash   Ø
+  runtime.strhash   ²
+  runtime.strhash   Œ
+  runtime.strhash   æ
+  runtime.strhash   À
+  runtime.strhash   š
+  runtime.strhash   ô
+  runtime.strhash   Î
+  runtime.strhash   ®
+  runtime.strhash   
+  runtime.strhash   î
+  runtime.strhash   Î	
+  runtime.strhash   ®
+
+  runtime.strhash   
+  runtime.strhash   î
+  runtime.strhash   Æ
+  (type..hash.time.Time   
+  (type..hash.time.Time   ê
+  0runtime.morestack_noctxt   0@  "".~r2  type.uintptr "".h type.uintptr "".p  &type.*"".UserDetail @Ê?@Ş À À  >‚ TgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2 TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   ”/Users/mitesh/Personal/bitbucket/go-web/src/model/userdetail/userdetail.goş,type..eq."".UserDetail à$  Ä$eH‹%    H;a†	  HƒìHH‹L$PH‹D$XH‹H‹(H9ët
+ÆD$` HƒÄHÃH‹qH‹IH‹PH‹@H9Á…¿  H‰t$8H‰4$H‰L$@H‰L$H‰T$(H‰T$H‰D$0H‰D$è    ¶\$ €û „…  H‹\$PHƒû „o  H‹SH‹C H‹\$XHƒû „Q  H‹sH‹K H9È…6  H‰T$(H‰$H‰D$0H‰D$H‰t$8H‰t$H‰L$@H‰L$è    ¶\$ €û „ü  H‹\$PHƒû „æ  H‹s(H‹K0H‹\$XHƒû „È  H‹S(H‹C0H9Á…­  H‰t$8H‰4$H‰L$@H‰L$H‰T$(H‰T$H‰D$0H‰D$è    ¶\$ €û „s  H‹\$PHƒû „]  H‹S8H‹C@H‹\$XHƒû „?  H‹s8H‹K@H9È…$  H‰T$(H‰$H‰D$0H‰D$H‰t$8H‰t$H‰L$@H‰L$è    ¶\$ €û „ê  H‹\$PHƒû „Ô  H‹sHH‹KPH‹\$XHƒû „¶  H‹SHH‹CPH9Á…›  H‰t$8H‰4$H‰L$@H‰L$H‰T$(H‰T$H‰D$0H‰D$è    ¶\$ €û „a  H‹\$PHƒû „K  H‹SXH‹C`H‹\$XHƒû „-  H‹sXH‹K`H9È…  H‰T$(H‰$H‰D$0H‰D$H‰t$8H‰t$H‰L$@H‰L$è    ¶\$ €û „Ø  H‹\$PHƒû „Â  H‹shH‹KpH‹\$XHƒû „¤  H‹ShH‹CpH9Á…‰  H‰t$8H‰4$H‰L$@H‰L$H‰T$(H‰T$H‰D$0H‰D$è    ¶\$ €û „O  H‹\$PHƒû „9  H‹SxH‹ƒ€   H‹\$XHƒû „  H‹sxH‹‹€   H9È…ú  H‰T$(H‰$H‰D$0H‰D$H‰t$8H‰t$H‰L$@H‰L$è    ¶\$ €û „À  H‹\$PHƒû „ª  H‹³ˆ   H‹‹   H‹\$XHƒû „†  H‹“ˆ   H‹ƒ   H9Á…e  H‰t$8H‰4$H‰L$@H‰L$H‰T$(H‰T$H‰D$0H‰D$è    ¶\$ €û „+  H‹\$PHƒû „  H‹“˜   H‹ƒ    H‹\$XHƒû „ñ  H‹³˜   H‹‹    H9È…Ğ  H‰T$(H‰$H‰D$0H‰D$H‰t$8H‰t$H‰L$@H‰L$è    ¶\$ €û „–  H‹\$PHƒû „€  H‹³¨   H‹‹°   H‹\$XHƒû „\  H‹“¨   H‹ƒ°   H9Á…;  H‰t$8H‰4$H‰L$@H‰L$H‰T$(H‰T$H‰D$0H‰D$è    ¶\$ €û „  H‹\$PHƒû „ë  H‹“¸   H‹ƒÀ   H‹\$XHƒû „Ç  H‹³¸   H‹‹À   H9È…¦  H‰T$(H‰$H‰D$0H‰D$H‰t$8H‰t$H‰L$@H‰L$è    ¶\$ €û „l  H‹\$PHƒû „V  H‹³È   H‹‹Ğ   H‹\$XHƒû „2  H‹“È   H‹ƒĞ   H9Á…  H‰t$8H‰4$H‰L$@H‰L$H‰T$(H‰T$H‰D$0H‰D$è    ¶\$ €û „×  H‹\$PHƒû „Á  H‹“Ø   H‹ƒà   H‹\$XHƒû „  H‹³Ø   H‹‹à   H9È…|  H‰T$(H‰$H‰D$0H‰D$H‰t$8H‰t$H‰L$@H‰L$è    ¶\$ €û „B  H‹\$PHƒû „,  H‹³è   H‹‹ğ   H‹\$XHƒû „  H‹“è   H‹ƒğ   H9Á…ç   H‰t$8H‰4$H‰L$@H‰L$H‰T$(H‰T$H‰D$0H‰D$è    H‹t$PH‹T$X¶\$ €û „£   H‰ñHƒş „   HÁø   H‰ĞHƒú t{Hø   H‹H‹(H9ëu`‹Y‹h9ëuVH‹YH‹hH9ëuIH‰ğH  H‰ÑHÁ  H‹H‹)H9ëu!‹X‹i9ëuH‹XH‹iH9ëu
+ÆD$`HƒÄHÃÆD$` HƒÄHÃÆD$` HƒÄHÃ‰ë‰éjÿÿÿÆD$` HƒÄHÃ‰éñşÿÿ‰éÍşÿÿÆD$` HƒÄHÃ‰é\şÿÿ‰é8şÿÿÆD$` HƒÄHÃ‰éÇıÿÿ‰é£ıÿÿÆD$` HƒÄHÃ‰é2ıÿÿ‰éıÿÿÆD$` HƒÄHÃ‰éüÿÿ‰éyüÿÿÆD$` HƒÄHÃ‰éüÿÿ‰éäûÿÿÆD$` HƒÄHÃ‰ésûÿÿ‰éOûÿÿÆD$` HƒÄHÃ‰éáúÿÿ‰éÀúÿÿÆD$` HƒÄHÃ‰éUúÿÿ‰é7úÿÿÆD$` HƒÄHÃ‰éÌùÿÿ‰é®ùÿÿÆD$` HƒÄHÃ‰éCùÿÿ‰é%ùÿÿÆD$` HƒÄHÃ‰éºøÿÿ‰éœøÿÿÆD$` HƒÄHÃ‰é1øÿÿ‰éøÿÿÆD$` HƒÄHÃ‰é¨÷ÿÿ‰éŠ÷ÿÿÆD$` HƒÄHÃè    éŞöÿÿ"
+      î
+   runtime.eqstring   Ğ
+   runtime.eqstring   ²
+   runtime.eqstring   ”
+   runtime.eqstring   ö
+   runtime.eqstring   Ø
+
+   runtime.eqstring   º
+   runtime.eqstring   ¨
+   runtime.eqstring   ¢
+   runtime.eqstring   œ
+   runtime.eqstring   –
+   runtime.eqstring   
+   runtime.eqstring   Š
+   runtime.eqstring   „
+   runtime.eqstring   ş
+   runtime.eqstring   ²$
+  0runtime.morestack_noctxt   0  F"".autotmp_0041  type.*time.Time "".autotmp_0040  type.*time.Time "".autotmp_0037  type.string "".autotmp_0036  type.string "".autotmp_0035  type.string "".autotmp_0034  type.string "".autotmp_0033  type.string "".autotmp_0032  type.string "".autotmp_0031  type.string "".autotmp_0030  type.string "".autotmp_0029  type.string "".autotmp_0028  type.string "".autotmp_0027  type.string "".autotmp_0026  type.string "".autotmp_0025  type.string "".autotmp_0024  type.string "".autotmp_0023  type.string "".autotmp_0022  type.string "".autotmp_0021  type.string "".autotmp_0020  type.string "".autotmp_0019  type.string "".autotmp_0018  type.string "".autotmp_0017  type.string "".autotmp_0016  type.string "".autotmp_0015  type.string "".autotmp_0014  type.string "".autotmp_0013  type.string "".autotmp_0012  type.string "".autotmp_0011  type.string "".autotmp_0010  type.string "".autotmp_0009 ?type.string "".autotmp_0008 type.string "".~r2  type.bool "".q &type.*"".UserDetail "".p  &type.*"".UserDetail òè		 ° °  vº TgclocalsÂ·3bb21ca8fe1d99a3e492463bd711418a TgclocalsÂ·a8eabfc4a4514ed6b3b0c61e9680e440   ”/Users/mitesh/Personal/bitbucket/go-web/src/model/userdetail/userdetail.goşTgclocalsÂ·014ab8b286467dfcb2a39208605b0cca @  @   .                         şTgclocalsÂ·b78c9ff012ae009395460ad05a7a8a3f (  (      ªªª*ªªª*ªªª* şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           ş""".statictmp_0005  Ğ$type."".UserDetail   ş0"".initdoneÂ·  type.uint8   ş"".CreateÂ·f              "".Create   ş"".initÂ·f              "".init   şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2             şTgclocalsÂ·a8eabfc4a4514ed6b3b0c61e9680e440              şTgclocalsÂ·3bb21ca8fe1d99a3e492463bd711418a             ş8type..hashfunc."".UserDetail              0type..hash."".UserDetail   ş4type..eqfunc."".UserDetail              ,type..eq."".UserDetail   ş.type..alg."".UserDetail                        8type..hashfunc."".UserDetail     4type..eqfunc."".UserDetail   ş2runtime.gcbits.aaaaaa2a12 
+  
+ªªª* şJgo.string.hdr."userdetail.UserDetail"                       Bgo.string."userdetail.UserDetail"   şBgo.string."userdetail.UserDetail" 0  ,userdetail.UserDetail  ş,go.string.hdr."UserId"                       $go.string."UserId"   ş$go.string."UserId"   UserId  şHgo.string.hdr."gorm:\"primary_key\""                       @go.string."gorm:\"primary_key\""   ş@go.string."gorm:\"primary_key\"" 0  &gorm:"primary_key"  ş0go.string.hdr."DeviceId"                       (go.string."DeviceId"   ş(go.string."DeviceId"    DeviceId  şHgo.string.hdr."sql:\"DEFAULT:NULL\""                       @go.string."sql:\"DEFAULT:NULL\""   ş@go.string."sql:\"DEFAULT:NULL\"" 0  &sql:"DEFAULT:NULL"  ş4go.string.hdr."AppVersion"             
+          ,go.string."AppVersion"   ş,go.string."AppVersion"    AppVersion  ş4go.string.hdr."LocaleCode"             
+          ,go.string."LocaleCode"   ş,go.string."LocaleCode"    LocaleCode  ş<go.string.hdr."ConnectionType"                       4go.string."ConnectionType"   ş4go.string."ConnectionType"    ConnectionType  ş8go.string.hdr."Manufacturer"                       0go.string."Manufacturer"   ş0go.string."Manufacturer"    Manufacturer  ş4go.string.hdr."DeviceMode"             
+          ,go.string."DeviceMode"   ş,go.string."DeviceMode"    DeviceMode  ş2go.string.hdr."AndroidId"             	          *go.string."AndroidId"   ş*go.string."AndroidId"    AndroidId  ş4go.string.hdr."CareerName"             
+          ,go.string."CareerName"   ş,go.string."CareerName"    CareerName  ş$go.string.hdr."Ip"                       go.string."Ip"   şgo.string."Ip"   Ip  ş&go.string.hdr."Mac"                       go.string."Mac"   şgo.string."Mac"   Mac  ş2go.string.hdr."UtmSource"             	          *go.string."UtmSource"   ş*go.string."UtmSource"    UtmSource  ş2go.string.hdr."UtmMedium"             	          *go.string."UtmMedium"   ş*go.string."UtmMedium"    UtmMedium  ş4go.string.hdr."UtmContent"             
+          ,go.string."UtmContent"   ş,go.string."UtmContent"    UtmContent  ş6go.string.hdr."UtmCampaign"                       .go.string."UtmCampaign"   ş.go.string."UtmCampaign"    UtmCampaign  ş.go.string.hdr."UtmTerm"                       &go.string."UtmTerm"   ş&go.string."UtmTerm"   UtmTerm  ş2go.string.hdr."CreatedAt"             	          *go.string."CreatedAt"   ş*go.string."CreatedAt"    CreatedAt  ş2go.string.hdr."UpdatedAt"             	          *go.string."UpdatedAt"   ş*go.string."UpdatedAt"    UpdatedAt  ş4go.string.hdr."UserDetail"             
+          ,go.string."UserDetail"   ş,go.string."UserDetail"    UserDetail  ş@go.string.hdr."model/userdetail"                       8go.string."model/userdetail"   ş8go.string."model/userdetail" 0  "model/userdetail  ş"go.importpath."".                       8go.string."model/userdetail"   ş$type."".UserDetail  °  °(      (      çÉ¸]                                                                                                                                                                                                                             (                                       8                                       H                                       X                                       h                                       x                                       ˆ                                       ˜                                       ¨                                       ¸                                       È                                       Ø                                       è                                       ø                                                                                     |0  .type..alg."".UserDetail   @  2runtime.gcbits.aaaaaa2a12   P  Jgo.string.hdr."userdetail.UserDetail"   p  &type.*"".UserDetail   €  "runtime.zerovalue   À $type."".UserDetail   À  ,go.string.hdr."UserId"   à  type.int   ğ  Hgo.string.hdr."gorm:\"primary_key\""     0go.string.hdr."DeviceId"   °  type.string   À  Hgo.string.hdr."sql:\"DEFAULT:NULL\""   à  4go.string.hdr."AppVersion"   €  type.string     Hgo.string.hdr."sql:\"DEFAULT:NULL\""   °  4go.string.hdr."LocaleCode"   Ğ  type.string   à  Hgo.string.hdr."sql:\"DEFAULT:NULL\""   €  <go.string.hdr."ConnectionType"      type.string   °  Hgo.string.hdr."sql:\"DEFAULT:NULL\""   Ğ  8go.string.hdr."Manufacturer"   ğ  type.string   €  Hgo.string.hdr."sql:\"DEFAULT:NULL\""      4go.string.hdr."DeviceMode"   À  type.string   Ğ  Hgo.string.hdr."sql:\"DEFAULT:NULL\""   ğ  2go.string.hdr."AndroidId"     type.string      Hgo.string.hdr."sql:\"DEFAULT:NULL\""   À  4go.string.hdr."CareerName"   à  type.string   ğ  Hgo.string.hdr."sql:\"DEFAULT:NULL\""     $go.string.hdr."Ip"   °  type.string   À  Hgo.string.hdr."sql:\"DEFAULT:NULL\""   à  &go.string.hdr."Mac"   €  type.string     Hgo.string.hdr."sql:\"DEFAULT:NULL\""   °  2go.string.hdr."UtmSource"   Ğ  type.string   à  Hgo.string.hdr."sql:\"DEFAULT:NULL\""   €	  2go.string.hdr."UtmMedium"    	  type.string   °	  Hgo.string.hdr."sql:\"DEFAULT:NULL\""   Ğ	  4go.string.hdr."UtmContent"   ğ	  type.string   €
+  Hgo.string.hdr."sql:\"DEFAULT:NULL\""    
+  6go.string.hdr."UtmCampaign"   À
+  type.string   Ğ
+  Hgo.string.hdr."sql:\"DEFAULT:NULL\""   ğ
+  .go.string.hdr."UtmTerm"     type.string      Hgo.string.hdr."sql:\"DEFAULT:NULL\""   À  2go.string.hdr."CreatedAt"   à  type.time.Time     2go.string.hdr."UpdatedAt"   °  type.time.Time   `à $type."".UserDetail   à  4go.string.hdr."UserDetail"   ğ  "go.importpath."".   €° $type."".UserDetail   ş"runtime.gcbits.01    şLgo.string.hdr."*userdetail.UserDetail"                       Dgo.string."*userdetail.UserDetail"   şDgo.string."*userdetail.UserDetail" 0  .*userdetail.UserDetail  ş&type.*"".UserDetail                    :‘Y[ 6                                                        0   runtime.algarray   @  "runtime.gcbits.01   P  Lgo.string.hdr."*userdetail.UserDetail"   p  8go.weak.type.**"".UserDetail   €  "runtime.zerovalue     $type."".UserDetail   ş.go.string.hdr."runtime"                       &go.string."runtime"   ş&go.string."runtime"   runtime  ş,go.importpath.runtime.                       &go.string."runtime"   ş*go.string.hdr."model"                       "go.string."model"   ş"go.string."model"   model  ş(go.importpath.model.                       "go.string."model"   ş(go.string.hdr."time"                        go.string."time"   ş go.string."time"   
+time  ş&go.importpath.time.                        go.string."time"   ş6type..hash."".UserDetailÂ·f              0type..hash."".UserDetail   ş2type..eq."".UserDetailÂ·f              ,type..eq."".UserDetail   ş"runtime.zerovalue      ÿÿgo13ld 

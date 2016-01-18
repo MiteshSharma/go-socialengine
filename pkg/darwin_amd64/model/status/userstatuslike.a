@@ -1,0 +1,166 @@
+!<arch>
+__.PKGDEF       0           0     0     644     9412      `
+go object darwin amd64 go1.5.3 X:none
+build id "cdf881c5db5b6c84851ff7a67e62a1e5986d3d47"
+
+$$
+package userstatuslike
+	import runtime "runtime"
+	import time "time"
+	import model "model"
+	import status "model/status"
+	func @"".Create (@"".userIdÂ·1 int, @"".userStatusIdÂ·2 int)
+	type @"time".zone struct { @"time".name string; @"time".offset int; @"time".isDST bool }
+	type @"time".zoneTrans struct { @"time".when int64; @"time".index uint8; @"time".isstd bool; @"time".isutc bool }
+	type @"time".Location struct { @"time".name string; @"time".zone []@"time".zone; @"time".tx []@"time".zoneTrans; @"time".cacheStart int64; @"time".cacheEnd int64; @"time".cacheZone *@"time".zone }
+	func (@"time".lÂ·2 *@"time".Location "esc:0x22") String () (? string)
+	func (@"time".lÂ·2 *@"time".Location "esc:0x1") @"time".firstZoneUsed () (? bool)
+	func (@"time".lÂ·2 *@"time".Location "esc:0x12") @"time".get () (? *@"time".Location)
+	func (@"time".lÂ·6 *@"time".Location "esc:0x32") @"time".lookup (@"time".secÂ·7 int64) (@"time".nameÂ·1 string, @"time".offsetÂ·2 int, @"time".isDSTÂ·3 bool, @"time".startÂ·4 int64, @"time".endÂ·5 int64)
+	func (@"time".lÂ·2 *@"time".Location "esc:0x1") @"time".lookupFirstZone () (? int)
+	func (@"time".lÂ·4 *@"time".Location "esc:0x1") @"time".lookupName (@"time".nameÂ·5 string "esc:0x1", @"time".unixÂ·6 int64) (@"time".offsetÂ·1 int, @"time".isDSTÂ·2 bool, @"time".okÂ·3 bool)
+	type @"time".Duration int64
+	func (@"time".dÂ·2 @"time".Duration) Hours () (? float64) { var @"time".hourÂ·3 @"time".Duration; ; @"time".hourÂ·3 = @"time".dÂ·2 / @"time".Duration(0x34630b8a000); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0x34630b8a000); return float64(@"time".hourÂ·3) + float64(@"time".nsecÂ·4) * 8190022623310637111963488201822504381538623676021880892417778544696899264837610290203272971060556344039023584360473938041055625214280336402169897364226048p-553 }
+	func (@"time".dÂ·2 @"time".Duration) Minutes () (? float64) { var @"time".minÂ·3 @"time".Duration; ; @"time".minÂ·3 = @"time".dÂ·2 / @"time".Duration(0xdf8475800); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0xdf8475800); return float64(@"time".minÂ·3) + float64(@"time".nsecÂ·4) * 7678146209353722106395056769533233877065564876941352542109479049699919628723768656821910653339403201031675627614471533358284117434246264392176261853609984p-547 }
+	func (@"time".dÂ·2 @"time".Duration) Nanoseconds () (? int64) { return int64(@"time".dÂ·2) }
+	func (@"time".dÂ·2 @"time".Duration) Seconds () (? float64) { var @"time".secÂ·3 @"time".Duration; ; @"time".secÂ·3 = @"time".dÂ·2 / @"time".Duration(0x3b9aca00); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0x3b9aca00); return float64(@"time".secÂ·3) + float64(@"time".nsecÂ·4) * 7198262071269114660816079141112770740375861891461678802759824945047098083990024106014198994535558872472104883612039846078596891298747423852523262413111296p-541 }
+	func (@"time".dÂ·2 @"time".Duration) String () (? string)
+	type @"time".Month int
+	func (@"time".mÂ·2 @"time".Month) String () (? string) { return @"time".months[@"time".mÂ·2 - @"time".Month(0x1)] }
+	type @"time".Weekday int
+	func (@"time".dÂ·2 @"time".Weekday) String () (? string) { return @"time".days[@"time".dÂ·2] }
+	type @"time".Time struct { @"time".sec int64; @"time".nsec int32; @"time".loc *@"time".Location }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Add (@"time".dÂ·3 @"time".Duration) (? @"time".Time) { @"time".tÂ·2.@"time".sec += int64(@"time".dÂ·3 / @"time".Duration(0x3b9aca00)); var @"time".nsecÂ·4 int32; ; @"time".nsecÂ·4 = int32(@"time".tÂ·2.@"time".nsec) + int32(@"time".dÂ·3 % @"time".Duration(0x3b9aca00)); if @"time".nsecÂ·4 >= 0x3b9aca00 { @"time".tÂ·2.@"time".sec++; @"time".nsecÂ·4 -= 0x3b9aca00 } else { if @"time".nsecÂ·4 < 0x0 { @"time".tÂ·2.@"time".sec--; @"time".nsecÂ·4 += 0x3b9aca00 } }; @"time".tÂ·2.@"time".nsec = @"time".nsecÂ·4; return @"time".tÂ·2 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") AddDate (@"time".yearsÂ·3 int, @"time".monthsÂ·4 int, @"time".daysÂ·5 int) (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") After (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec > @"time".uÂ·3.@"time".sec || @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec > @"time".uÂ·3.@"time".nsec }
+	func (@"time".tÂ·2 @"time".Time "esc:0x9") AppendFormat (@"time".bÂ·3 []byte "esc:0x1a", @"time".layoutÂ·4 string "esc:0x9") (? []byte)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Before (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec < @"time".uÂ·3.@"time".sec || @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec < @"time".uÂ·3.@"time".nsec }
+	func (@"time".tÂ·4 @"time".Time "esc:0x1") Clock () (@"time".hourÂ·1 int, @"time".minÂ·2 int, @"time".secÂ·3 int)
+	func (@"time".tÂ·4 @"time".Time "esc:0x1") Date () (@"time".yearÂ·1 int, @"time".monthÂ·2 @"time".Month, @"time".dayÂ·3 int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Day () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Equal (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec == @"time".uÂ·3.@"time".nsec }
+	func (@"time".tÂ·2 @"time".Time "esc:0x9") Format (@"time".layoutÂ·3 string "esc:0x9") (? string)
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") GobDecode (@"time".dataÂ·3 []byte "esc:0x1") (? error)
+	func (@"time".tÂ·3 @"time".Time "esc:0x1") GobEncode () (? []byte, ? error)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Hour () (? int)
+	func (@"time".tÂ·3 @"time".Time "esc:0x1") ISOWeek () (@"time".yearÂ·1 int, @"time".weekÂ·2 int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") In (@"time".locÂ·3 *@"time".Location "esc:0x12") (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") IsZero () (? bool) { return @"time".tÂ·2.@"time".sec == 0x0 && @"time".tÂ·2.@"time".nsec == 0x0 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Local () (? @"time".Time) { @"time".tÂ·2.@"time".loc = @"time".Local; return @"time".tÂ·2 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Location () (? *@"time".Location) { var @"time".lÂ·3 *@"time".Location; ; @"time".lÂ·3 = @"time".tÂ·2.@"time".loc; if @"time".lÂ·3 == nil { @"time".lÂ·3 = @"time".UTC }; return @"time".lÂ·3 }
+	func (@"time".tÂ·3 @"time".Time "esc:0x1") MarshalBinary () (? []byte, ? error)
+	func (@"time".tÂ·3 @"time".Time "esc:0x9") MarshalJSON () (? []byte, ? error)
+	func (@"time".tÂ·3 @"time".Time "esc:0x9") MarshalText () (? []byte, ? error)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Minute () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Month () (? @"time".Month)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Nanosecond () (? int) { return int(@"time".tÂ·2.@"time".nsec) }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Round (@"time".dÂ·3 @"time".Duration) (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Second () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x9") String () (? string)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Sub (@"time".uÂ·3 @"time".Time "esc:0x1") (? @"time".Duration)
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Truncate (@"time".dÂ·3 @"time".Duration) (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") UTC () (? @"time".Time) { @"time".tÂ·2.@"time".loc = @"time".UTC; return @"time".tÂ·2 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Unix () (? int64) { return @"time".tÂ·2.@"time".sec + -0xe7791f700 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") UnixNano () (? int64) { return (@"time".tÂ·2.@"time".sec + -0xe7791f700) * 0x3b9aca00 + int64(@"time".tÂ·2.@"time".nsec) }
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalBinary (@"time".dataÂ·3 []byte "esc:0x1") (? error)
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalJSON (@"time".dataÂ·3 []byte "esc:0x1") (@"time".errÂ·1 error)
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalText (@"time".dataÂ·3 []byte "esc:0x1") (@"time".errÂ·1 error)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Weekday () (? @"time".Weekday)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Year () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") YearDay () (? int)
+	func (@"time".tÂ·3 @"time".Time "esc:0x32") Zone () (@"time".nameÂ·1 string, @"time".offsetÂ·2 int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") @"time".abs () (? uint64)
+	func (@"time".tÂ·5 @"time".Time "esc:0x1") @"time".date (@"time".fullÂ·6 bool) (@"time".yearÂ·1 int, @"time".monthÂ·2 @"time".Month, @"time".dayÂ·3 int, @"time".ydayÂ·4 int)
+	func (@"time".tÂ·4 @"time".Time "esc:0x32") @"time".locabs () (@"time".nameÂ·1 string, @"time".offsetÂ·2 int, @"time".absÂ·3 uint64)
+	type @"model/status".UserStatusLike struct { ID int "gorm:\"primary_key;auto_increment\" json:\"userStatusLikeId\""; UserStatusId int "sql:\"not null\" json:\"userStatusId\""; UserId int "sql:\"not null\" json:\"userId\""; IsDeleted int "sql:\"DEFAULT:0\""; CreatedAt @"time".Time "json:\"createdAt\"" }
+	func @"".Read (@"".userStatusIdÂ·2 int) (? []@"model/status".UserStatusLike)
+	func @"".Delete (@"".userStatusLikeIdÂ·1 int, @"".userIdÂ·2 int)
+	func @"".DeleteAll (@"".userStatusIdÂ·1 int, @"".userIdÂ·2 int)
+	func @"".init ()
+	var @"time".months [12]string
+	var @"time".days [7]string
+	var @"time".Local *@"time".Location
+	var @"time".UTC *@"time".Location
+
+$$
+_go_.o          0           0     0     644     19692     `
+go object darwin amd64 go1.5.3 X:none
+
+!
+  go13ldtime.amodel.amodel/status.a ş"".Create  à  ØeH‹%    H„$XÿÿÿH;A†G  Hì(  H    H‰$è    H‹D$H‰D$81íH‰(H‰hH‰hH‰hH‰h ‰h(H‰h0H    H‰\$XHÇD$`   H    H‰$H\$XH‰\$HÇD$    è    H\$H|$H‹H‰H‹KH‰OH‹    H‰$1ÛH‰\$H‰\$ H‰\$(è    H‹L$0H‹D$8H‰$H    H‰\$HH‰\$H‰D$PH‰D$1ÛH‰\$H‰\$ H‰\$(è    H‹\$8H‹+H‰¬$ğ   H‹kH‰¬$ø   H‹kH‰¬$   H‹kH‰¬$  H‹k H‰¬$  ‹k(‰¬$  H‹k0H‰¬$   1ÉH‰Œ$¸   H‰Œ$À   H‰Œ$È   H‰Œ$Ğ   H‰Œ$Ø   ‰Œ$à   H‰Œ$è   HŒ$ğ   Hœ$¸   H‰$H‰\$è    H‹D$8¶\$€û „ø   H    H‰$è    H‹\$H‰\$@è    H‹$‹L$H‹D$E1ÉL‹„$8  H‹¼$0  H‰T$h‰L$pH‰D$xH‹\$@L‰Œ$€   L‰L‰„$ˆ   L‰CH‰¼$   H‰{L‰Œ$˜   L‰KH‰”$    H‰S ‰Œ$¨   ‰K(H‰„$°   €=     u<H‰C0H‹L$@H‹    H‰$H    H‰D$HH‰D$H‰L$PH‰L$è    HÄ(  ÃLC0L‰$H‰D$è    ë´H‹¬$8  H‰hH‹¬$0  H‰hHÇ@    è    H‹$‹L$H‹D$H‹\$8H‰T$hH‰S ‰L$p‰K(H‰D$x€=     u9H‰C0H‹L$8H‹    H‰$H    H‰D$HH‰D$H‰L$PH‰L$è    éVÿÿÿLC0L‰$H‰D$è    ë·è    é”üÿÿ4
+      J  @type.model/status.UserStatusLike   \
+  "runtime.newobject   ¶  4go.string."is_deleted = 1"   à  type.string   ˜
+  runtime.convT2E   Ö  model.Db   Š
+  Dgithub.com/jinzhu/gorm.(*DB).Where   ´  Btype.*model/status.UserStatusLike   ˆ
+  Bgithub.com/jinzhu/gorm.(*DB).Find   â
+  Htype..eq.model/status.UserStatusLike   –  @type.model/status.UserStatusLike   ¨
+  "runtime.newobject   Æ
+  time.Now   Ò	 6runtime.writeBarrierEnabled   ø	  model.Db   
+  Btype.*model/status.UserStatusLike   À
+
+  Fgithub.com/jinzhu/gorm.(*DB).Create   ô
+
+  .runtime.writebarrierptr   Â
+  time.Now   œ 6runtime.writeBarrierEnabled   Â  model.Db   Ø  Btype.*model/status.UserStatusLike   Š
+  Bgithub.com/jinzhu/gorm.(*DB).Save   ¸
+  .runtime.writebarrierptr   Æ
+  0runtime.morestack_noctxt    Ğ  "".autotmp_0015  Btype.*model/status.UserStatusLike "".autotmp_0014  Btype.*model/status.UserStatusLike "".autotmp_0013  type.time.Time "".autotmp_0012  Btype.*model/status.UserStatusLike "".autotmp_0011 Ï@type.model/status.UserStatusLike "".autotmp_0010 ÿtype.time.Time "".autotmp_0009 ß@type.model/status.UserStatusLike "".autotmp_0008 o@type.model/status.UserStatusLike "".autotmp_0005 Ÿtype.string $"".&userStatusLike ÏBtype.*model/status.UserStatusLike $"".&userStatusLike ßBtype.*model/status.UserStatusLike "".userStatusId type.int "".userId  type.int "Ğ‰ÏĞÄ ğ X"6°À
+€090! 2 -^¥#½'d TgclocalsÂ·ecf117a784d1ac4eed249e435806dc5b TgclocalsÂ·b78592300105a97b82be48ad7626a59d   ²/Users/mitesh/Personal/bitbucket/go-web/src/model/status/userstatuslike/userstatuslike.goş"".Read  €  ìeH‹%    H;a†Ù  Hì€   1ÛH‰œ$   H‰œ$˜   H‰œ$    H    H‰$è    H‹\$H‰\$@H    H‰\$XHÇD$`   H‹œ$ˆ   H‰\$8H    H‰$è    H‹\$Hƒû „V  HÇD$p   HÇD$x   H‰\$hH    H‰$H\$8H‰\$HÇD$    è    H‹L$H‹D$ H‹\$hH‰L$HH‰H‰D$P€=     …Ü   H‰CH    H‰$H\$XH‰\$HÇD$    è    H\$H|$H‹H‰H‹KH‰OH‹    H‰$H‹\$hH‰\$H‹\$pH‰\$ H‹\$xH‰\$(è    H‹L$0H‹D$@H‰$H    H‰\$HH‰\$H‰D$PH‰D$1ÛH‰\$H‰\$ H‰\$(è    H‹\$@H‹+H‰¬$   H‹kH‰¬$˜   H‹kH‰¬$    HÄ€   ÃLCL‰$H‰D$è    éÿÿÿ‰é£şÿÿè    é
+şÿÿ"
+      n  Dtype.[]model/status.UserStatusLike   €
+  "runtime.newobject   ¢  <go.string."user_status_id = ?"   æ  (type.[1]interface {}   ø
+  "runtime.newobject   Ò  type.int   Š
+  runtime.convT2E   Î 6runtime.writeBarrierEnabled   ò  type.string   ª
+  runtime.convT2E   è  model.Db   ¶
+  Dgithub.com/jinzhu/gorm.(*DB).Where   à  Ftype.*[]model/status.UserStatusLike   ´
+  Bgithub.com/jinzhu/gorm.(*DB).Find   ¸
+  .runtime.writebarrierptr   Ú
+  0runtime.morestack_noctxt   @€  "".autotmp_0029 o"type.interface {} "".autotmp_0027 /&type.[]interface {} "".autotmp_0024 type.int "".autotmp_0023 Otype.string &"".&userStatusLikes Ftype.*[]model/status.UserStatusLike "".~r1 Dtype.[]model/status.UserStatusLike "".userStatusId  type.int €³ÿ€2 € >4Ğ0  ?<I–% TgclocalsÂ·cc973a3bbfedabc8985f452fd9c2dde6 TgclocalsÂ·19fe09b2e7f44f7d3db602520651ab48   ²/Users/mitesh/Personal/bitbucket/go-web/src/model/status/userstatuslike/userstatuslike.goş"".Delete  À  °eH‹%    H;a†{  HƒìxH    H‰$è    H‹D$1íH‰(H‰hH‰hH‰hH‰h ‰h(H‰h0H‰D$HH‰D$@H‹œ$€   H‰\$8H    H‰$è    H‹\$Hƒû „	  HÇD$h   HÇD$p   H‰\$`H    H‰$H\$8H‰\$HÇD$    è    H‹L$H‹D$ H‹\$`H‰L$PH‰H‰D$X€=     …   H‰CH‹    H‰$H‹D$@H    H‰L$PH‰L$H‰D$XH‰D$H‹\$`H‰\$H‹\$hH‰\$ H‹\$pH‰\$(è    H‹D$HHÇ@   H‹    H‰$H    H‰L$PH‰L$H‰D$XH‰D$è    HƒÄxÃLCL‰$H‰D$è    é^ÿÿÿ‰éğşÿÿè    éhşÿÿ 
+      4  @type.model/status.UserStatusLike   F
+  "runtime.newobject   Ä  (type.[1]interface {}   Ö
+  "runtime.newobject   °  type.int   è
+  runtime.convT2E   ¬ 6runtime.writeBarrierEnabled   Ğ  model.Db   ğ  Btype.*model/status.UserStatusLike   Ş
+  Dgithub.com/jinzhu/gorm.(*DB).First   †  model.Db   œ  Btype.*model/status.UserStatusLike   Î
+  Bgithub.com/jinzhu/gorm.(*DB).Save   ü
+  .runtime.writebarrierptr   
+  0runtime.morestack_noctxt    ğ  "".autotmp_0037 O"type.interface {} "".autotmp_0035 /&type.[]interface {} "".autotmp_0034  Btype.*model/status.UserStatusLike "".autotmp_0033 type.int "".autotmp_0032 oBtype.*model/status.UserStatusLike $"".&userStatusLike _Btype.*model/status.UserStatusLike "".userId type.int &"".userStatusLikeId  type.int ğØïğ0   $J1ğ+  "HI{8# TgclocalsÂ·2717b161b89b1669e92981e435d8bdf2 TgclocalsÂ·a0e68e801a4127b35a82e32346de6a9c   ²/Users/mitesh/Personal/bitbucket/go-web/src/model/status/userstatuslike/userstatuslike.goş"".DeleteAll  À  ¶eH‹%    H„$`ÿÿÿH;A†6  Hì   H    H‰$è    H‹\$H‰\$XH    H‰$è    H‹D$Hƒø „ï  H‹\$X1Ò1ÉH‰”$    H‰SH‰Œ$¨   H‰KH‰„$˜   €=     …¦  H‰H    H‰\$pHÇD$x   H‹œ$(  H‰\$HH    H‰$è    H‹\$Hƒû „[  HÇ„$ˆ      HÇ„$      H‰œ$€   H    H‰$H\$HH‰\$HÇD$    è    H‹L$H‹D$ H‹œ$€   H‰L$`H‰H‰D$h€=     …Õ  H‰CH    H‰$H\$pH‰\$HÇD$    è    H\$H|$H‹H‰H‹KH‰OH‹    H‰$H‹œ$€   H‰\$H‹œ$ˆ   H‰\$ H‹œ$   H‰\$(è    H‹L$0H‹D$XH‰$H    H‰\$`H‰\$H‰D$hH‰D$1ÛH‰\$H‰\$ H‰\$(è    H‹\$XH‹H‹SH‹kH‰¬$¨   1ÉH‰”$    H‰T$8H‰„$˜   H‹l$8H9éÔ   H‰ÃH‰D$PHƒø „Ê   H‹ L‹SL‹KL‹CH‹{ ‹s(H‹k0H‰L$@H‰„$è   L‰”$ğ   L‰”$¸   L‰Œ$ø   L‰Œ$À   L‰„$   L‰„$È   H‰¼$  H‰¼$Ğ   ‰´$  ‰´$Ø   H‰¬$  H‰¬$à   H‰„$°   H‰$H‹œ$0  H‰\$è    H‹D$PH‹L$@HƒÀ8HÿÁH‹l$8H9éŒ,ÿÿÿHÄ   Ã‰ é/ÿÿÿLCL‰$H‰D$è    éşÿÿ‰éıÿÿH‰$H‰D$è    éJıÿÿ‰ é
+ıÿÿè    é¥üÿÿ,
+      J  Dtype.[]model/status.UserStatusLike   \
+  "runtime.newobject   ~  Ftype.[0]model/status.UserStatusLike   
+  "runtime.newobject   Œ 6runtime.writeBarrierEnabled   ®  <go.string."user_status_id = ?"   ò  (type.[1]interface {}   „
+  "runtime.newobject   ğ  type.int   ¨
+  runtime.convT2E   ò 6runtime.writeBarrierEnabled   –  type.string   Î
+  runtime.convT2E   Œ  model.Db   ì
+  Dgithub.com/jinzhu/gorm.(*DB).Where   –  Ftype.*[]model/status.UserStatusLike   ê
+  Bgithub.com/jinzhu/gorm.(*DB).Find   Î
+  "".Delete   Î
+  .runtime.writebarrierptr   ‚
+  .runtime.writebarrierptr   ¤
+  0runtime.morestack_noctxt    À  "".autotmp_0055 o@type.model/status.UserStatusLike "".autotmp_0054 ŸBtype.*model/status.UserStatusLike "".autotmp_0053 Ïtype.int "".autotmp_0052 ¿type.int "".autotmp_0051 ÿ"type.interface {} "".autotmp_0049 ¿&type.[]interface {} "".autotmp_0047 Dtype.[]model/status.UserStatusLike "".autotmp_0046  Dtype.[]model/status.UserStatusLike "".autotmp_0043 ¯type.int "".autotmp_0042 ßtype.string &"".&userStatusLikes Ftype.*[]model/status.UserStatusLike """.userStatusLike ß@type.model/status.UserStatusLike "".userId type.int "".userStatusId  type.int "Àï¿ÀN à :X"råÔ * -zR¢±@  TgclocalsÂ·ecf117a784d1ac4eed249e435806dc5b TgclocalsÂ·1eb9c5d9f9116707f670d56af74578d1   ²/Users/mitesh/Personal/bitbucket/go-web/src/model/status/userstatuslike/userstatuslike.goş"".init  À  ¨eH‹%    H;av>¶    €û t¶    €ûuÃè    Æ    è    è    è    Æ    Ãè    ë¬
+      $  "".initdoneÂ·   <  "".initdoneÂ·   R
+  "runtime.throwinit   b "".initdoneÂ·   n
+  time.init   x
+  model.init   ‚
+  "model/status.init    "".initdoneÂ·   œ
+  0runtime.morestack_noctxt        ` ` f` 
+ (8 TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   ²/Users/mitesh/Personal/bitbucket/go-web/src/model/status/userstatuslike/userstatuslike.goş4type..hash.[1]interface {} à  ÊeH‹%    H;a†ˆ   Hƒì(H‹L$81ÀHÇD$   H‹l$H9è}\H‰D$ H‰ÅH‰ÈHÁÀH»¿c»kïR H¯ØH‰ØH‹\$0Hƒû t;HÁåHëH‰$H‰D$8H‰D$è    H‹L$H‹D$ HÿÀH‹l$H9è|¤H‰L$@HƒÄ(Ã‰ëÁè    é[ÿÿÿ
+      ä
+  (runtime.nilinterhash   ¸
+  0runtime.morestack_noctxt   0P  
+"".autotmp_0059 type.int "".autotmp_0058 type.int "".~r2  type.uintptr "".h type.uintptr "".p  *type.*[1]interface {} POP ° ° 
+ q? TgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2 TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   ²/Users/mitesh/Personal/bitbucket/go-web/src/model/status/userstatuslike/userstatuslike.goş0type..eq.[1]interface {} à  ÖeH‹%    H;a†Î   HƒìX1ÀHÇD$(   H‹l$(H9è’   H‰D$0H‹\$hHƒû „–   H‰ÅHÁåHëH‹H‹sH‹\$`Hƒû tvH‰ÅHÁåHëH‹H‹SH9ÈuVH‰D$8H‰$H‰T$@H‰T$H‰L$HH‰L$H‰t$PH‰t$è    ¶\$ €û t H‹D$0HÿÀH‹l$(H9èŒnÿÿÿÆD$pHƒÄXÃÆD$p HƒÄXÃ‰ë†‰écÿÿÿè    éÿÿÿ
+      ¼
+  runtime.efaceeq   Ä
+  0runtime.morestack_noctxt   0°  "".autotmp_0063 ?"type.interface {} "".autotmp_0062 "type.interface {} "".autotmp_0061 _type.int "".autotmp_0060 Otype.int "".~r2  type.bool "".q *type.*[1]interface {} "".p  *type.*[1]interface {} &°´¯°	¯° ğ ğ  S TgclocalsÂ·3bb21ca8fe1d99a3e492463bd711418a TgclocalsÂ·a8eabfc4a4514ed6b3b0c61e9680e440   ²/Users/mitesh/Personal/bitbucket/go-web/src/model/status/userstatuslike/userstatuslike.goşRtype..hash.[0]model/status.UserStatusLike à  ÊeH‹%    H;a†ˆ   Hƒì(H‹L$81ÀHÇD$    H‹l$H9è}\H‰D$ H‰ÅH‰ÈHÁÀH»¿c»kïR H¯ØH‰ØH‹\$0Hƒû t;Hkí8HëH‰$H‰D$8H‰D$è    H‹L$H‹D$ HÿÀH‹l$H9è|¤H‰L$@HƒÄ(Ã‰ëÁè    é[ÿÿÿ
+      ä
+  Ltype..hash.model/status.UserStatusLike   ¸
+  0runtime.morestack_noctxt   0P  
+"".autotmp_0065 type.int "".autotmp_0064 type.int "".~r2  type.uintptr "".h type.uintptr "".p  Htype.*[0]model/status.UserStatusLike POP ° ° 
+ q? TgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2 TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   ²/Users/mitesh/Personal/bitbucket/go-web/src/model/status/userstatuslike/userstatuslike.goşNtype..eq.[0]model/status.UserStatusLike à  ÖeH‹%    H;a†   Hƒì(1ÀHÇD$    H‹l$H9è}cH‰D$ H‹L$0Hƒù taH‹\$8H‰ÅHkí8HéHƒû tHH‰ÅHkí8HëH‰$H‰\$è    ¶\$€û u
+ÆD$@ HƒÄ(ÃH‹D$ HÿÀH‹l$H9è|ÆD$@HƒÄ(Ã‰ë´‰ë›è    éUÿÿÿ
+      Ê
+  Htype..eq.model/status.UserStatusLike   Ä
+  0runtime.morestack_noctxt   0P  
+"".autotmp_0067 type.int "".autotmp_0066 type.int "".~r2  type.bool "".q Htype.*[0]model/status.UserStatusLike "".p  Htype.*[0]model/status.UserStatusLike PeOPOP ° ° 
+ dL TgclocalsÂ·3bb21ca8fe1d99a3e492463bd711418a TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   ²/Users/mitesh/Personal/bitbucket/go-web/src/model/status/userstatuslike/userstatuslike.goş<go.string.hdr."is_deleted = 1"                       4go.string."is_deleted = 1"   ş4go.string."is_deleted = 1"    is_deleted = 1  şTgclocalsÂ·b78592300105a97b82be48ad7626a59d 8  8              @        şTgclocalsÂ·ecf117a784d1ac4eed249e435806dc5b 8  8                           şDgo.string.hdr."user_status_id = ?"                       <go.string."user_status_id = ?"   ş<go.string."user_status_id = ?" 0  &user_status_id = ?  şTgclocalsÂ·19fe09b2e7f44f7d3db602520651ab48 (  (          	   )    şTgclocalsÂ·cc973a3bbfedabc8985f452fd9c2dde6 (  (                   şTgclocalsÂ·a0e68e801a4127b35a82e32346de6a9c 0  0                    şTgclocalsÂ·2717b161b89b1669e92981e435d8bdf2 0  0                       şTgclocalsÂ·1eb9c5d9f9116707f670d56af74578d1 8  8                R       şTgclocalsÂ·ecf117a784d1ac4eed249e435806dc5b 8  8                           şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           ş0"".initdoneÂ·  type.uint8   ş"".CreateÂ·f              "".Create   ş"".ReadÂ·f              "".Read   ş"".DeleteÂ·f              "".Delete   ş"".DeleteAllÂ·f              "".DeleteAll   ş"".initÂ·f              "".init   ş"runtime.gcbits.03    ş8go.string.hdr."interface {}"                       0go.string."interface {}"   ş0go.string."interface {}"    interface {}  ş"type.interface {} À  À              çW                                                                          0€  runtime.algarray   @  "runtime.gcbits.03   P  8go.string.hdr."interface {}"   p  4go.weak.type.*interface {}   €  "runtime.zerovalue   À "type.interface {}   ş"runtime.gcbits.01    ş<go.string.hdr."[]interface {}"                       4go.string."[]interface {}"   ş4go.string."[]interface {}"    []interface {}  ş&type.[]interface {}                   p“ê/                                                         0   runtime.algarray   @  "runtime.gcbits.01   P  <go.string.hdr."[]interface {}"   p  8go.weak.type.*[]interface {}   €  "runtime.zerovalue     "type.interface {}   şRgo.typelink.[]interface {}	[]interface {}              &type.[]interface {}   şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2             şTgclocalsÂ·a8eabfc4a4514ed6b3b0c61e9680e440              şTgclocalsÂ·3bb21ca8fe1d99a3e492463bd711418a             ş<type..hashfunc.[1]interface {}              4type..hash.[1]interface {}   ş8type..eqfunc.[1]interface {}              0type..eq.[1]interface {}   ş2type..alg.[1]interface {}                        <type..hashfunc.[1]interface {}     8type..eqfunc.[1]interface {}   ş>go.string.hdr."[1]interface {}"                       6go.string."[1]interface {}"   ş6go.string."[1]interface {}"     [1]interface {}  ş(type.[1]interface {} À  À              P‘[ú                                                                        0  2type..alg.[1]interface {}   @  "runtime.gcbits.03   P  >go.string.hdr."[1]interface {}"   p  :go.weak.type.*[1]interface {}   €  "runtime.zerovalue     "type.interface {}      &type.[]interface {}   şVgo.typelink.[1]interface {}	[1]interface {}              (type.[1]interface {}   şNgo.string.hdr."[]status.UserStatusLike"                       Fgo.string."[]status.UserStatusLike"   şFgo.string."[]status.UserStatusLike" 0  0[]status.UserStatusLike  şDtype.[]model/status.UserStatusLike                   Çœ5                                                         0   runtime.algarray   @  "runtime.gcbits.01   P  Ngo.string.hdr."[]status.UserStatusLike"   p  Vgo.weak.type.*[]model/status.UserStatusLike   €  "runtime.zerovalue     @type.model/status.UserStatusLike   ş‚go.typelink.[]status.UserStatusLike	[]model/status.UserStatusLike              Dtype.[]model/status.UserStatusLike   şPgo.string.hdr."*[]status.UserStatusLike"                       Hgo.string."*[]status.UserStatusLike"   şHgo.string."*[]status.UserStatusLike" @  2*[]status.UserStatusLike  şFtype.*[]model/status.UserStatusLike                   -Mg+ 6                                                        0   runtime.algarray   @  "runtime.gcbits.01   P  Pgo.string.hdr."*[]status.UserStatusLike"   p  Xgo.weak.type.**[]model/status.UserStatusLike   €  "runtime.zerovalue     Dtype.[]model/status.UserStatusLike   ş@go.string.hdr."*[1]interface {}"                       8go.string."*[1]interface {}"   ş8go.string."*[1]interface {}" 0  "*[1]interface {}  ş*type.*[1]interface {}                   ¿¨5 6                                                        0   runtime.algarray   @  "runtime.gcbits.01   P  @go.string.hdr."*[1]interface {}"   p  <go.weak.type.**[1]interface {}   €  "runtime.zerovalue     (type.[1]interface {}   şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2             şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·3bb21ca8fe1d99a3e492463bd711418a             şZtype..hashfunc.[0]model/status.UserStatusLike              Rtype..hash.[0]model/status.UserStatusLike   şVtype..eqfunc.[0]model/status.UserStatusLike              Ntype..eq.[0]model/status.UserStatusLike   şPtype..alg.[0]model/status.UserStatusLike                        Ztype..hashfunc.[0]model/status.UserStatusLike     Vtype..eqfunc.[0]model/status.UserStatusLike   şruntime.gcbits.      şPgo.string.hdr."[0]status.UserStatusLike"                       Hgo.string."[0]status.UserStatusLike"   şHgo.string."[0]status.UserStatusLike" @  2[0]status.UserStatusLike  şFtype.[0]model/status.UserStatusLike À  À                ’	| ‘                                                                        0  Ptype..alg.[0]model/status.UserStatusLike   @  runtime.gcbits.   P  Pgo.string.hdr."[0]status.UserStatusLike"   p  Xgo.weak.type.*[0]model/status.UserStatusLike   €  "runtime.zerovalue     @type.model/status.UserStatusLike      Dtype.[]model/status.UserStatusLike   ş†go.typelink.[0]status.UserStatusLike	[0]model/status.UserStatusLike              Ftype.[0]model/status.UserStatusLike   şRgo.string.hdr."*[0]status.UserStatusLike"                       Jgo.string."*[0]status.UserStatusLike"   şJgo.string."*[0]status.UserStatusLike" @  4*[0]status.UserStatusLike  şHtype.*[0]model/status.UserStatusLike                   7ø' 6                                                        0   runtime.algarray   @  "runtime.gcbits.01   P  Rgo.string.hdr."*[0]status.UserStatusLike"   p  Zgo.weak.type.**[0]model/status.UserStatusLike   €  "runtime.zerovalue     Ftype.[0]model/status.UserStatusLike   ş.go.string.hdr."runtime"                       &go.string."runtime"   ş&go.string."runtime"   runtime  ş,go.importpath.runtime.                       &go.string."runtime"   ş(go.string.hdr."time"                        go.string."time"   ş go.string."time"   
+time  ş&go.importpath.time.                        go.string."time"   ş*go.string.hdr."model"                       "go.string."model"   ş"go.string."model"   model  ş(go.importpath.model.                       "go.string."model"   ş8go.string.hdr."model/status"                       0go.string."model/status"   ş0go.string."model/status"    model/status  ş6go.importpath.model/status.                       0go.string."model/status"   ş:type..hash.[1]interface {}Â·f              4type..hash.[1]interface {}   ş6type..eq.[1]interface {}Â·f              0type..eq.[1]interface {}   şXtype..hash.[0]model/status.UserStatusLikeÂ·f              Rtype..hash.[0]model/status.UserStatusLike   şTtype..eq.[0]model/status.UserStatusLikeÂ·f              Ntype..eq.[0]model/status.UserStatusLike   ş"runtime.zerovalue      ÿÿgo13ld

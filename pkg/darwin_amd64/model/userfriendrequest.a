@@ -1,0 +1,331 @@
+!<arch>
+__.PKGDEF       0           0     0     644     9624      `
+go object darwin amd64 go1.5.3 X:none
+build id "ee715b9175a94cad5b5a36d0f6dd31e748fb765a"
+
+$$
+package userfriendrequest
+	import runtime "runtime"
+	import model "model"
+	import time "time"
+	import user "model/user"
+	import userfriend "model/userfriend"
+	type @"time".zone struct { @"time".name string; @"time".offset int; @"time".isDST bool }
+	type @"time".zoneTrans struct { @"time".when int64; @"time".index uint8; @"time".isstd bool; @"time".isutc bool }
+	type @"time".Location struct { @"time".name string; @"time".zone []@"time".zone; @"time".tx []@"time".zoneTrans; @"time".cacheStart int64; @"time".cacheEnd int64; @"time".cacheZone *@"time".zone }
+	func (@"time".lÂ·2 *@"time".Location "esc:0x22") String () (? string)
+	func (@"time".lÂ·2 *@"time".Location "esc:0x1") @"time".firstZoneUsed () (? bool)
+	func (@"time".lÂ·2 *@"time".Location "esc:0x12") @"time".get () (? *@"time".Location)
+	func (@"time".lÂ·6 *@"time".Location "esc:0x32") @"time".lookup (@"time".secÂ·7 int64) (@"time".nameÂ·1 string, @"time".offsetÂ·2 int, @"time".isDSTÂ·3 bool, @"time".startÂ·4 int64, @"time".endÂ·5 int64)
+	func (@"time".lÂ·2 *@"time".Location "esc:0x1") @"time".lookupFirstZone () (? int)
+	func (@"time".lÂ·4 *@"time".Location "esc:0x1") @"time".lookupName (@"time".nameÂ·5 string "esc:0x1", @"time".unixÂ·6 int64) (@"time".offsetÂ·1 int, @"time".isDSTÂ·2 bool, @"time".okÂ·3 bool)
+	type @"time".Duration int64
+	func (@"time".dÂ·2 @"time".Duration) Hours () (? float64) { var @"time".hourÂ·3 @"time".Duration; ; @"time".hourÂ·3 = @"time".dÂ·2 / @"time".Duration(0x34630b8a000); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0x34630b8a000); return float64(@"time".hourÂ·3) + float64(@"time".nsecÂ·4) * 8190022623310637111963488201822504381538623676021880892417778544696899264837610290203272971060556344039023584360473938041055625214280336402169897364226048p-553 }
+	func (@"time".dÂ·2 @"time".Duration) Minutes () (? float64) { var @"time".minÂ·3 @"time".Duration; ; @"time".minÂ·3 = @"time".dÂ·2 / @"time".Duration(0xdf8475800); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0xdf8475800); return float64(@"time".minÂ·3) + float64(@"time".nsecÂ·4) * 7678146209353722106395056769533233877065564876941352542109479049699919628723768656821910653339403201031675627614471533358284117434246264392176261853609984p-547 }
+	func (@"time".dÂ·2 @"time".Duration) Nanoseconds () (? int64) { return int64(@"time".dÂ·2) }
+	func (@"time".dÂ·2 @"time".Duration) Seconds () (? float64) { var @"time".secÂ·3 @"time".Duration; ; @"time".secÂ·3 = @"time".dÂ·2 / @"time".Duration(0x3b9aca00); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0x3b9aca00); return float64(@"time".secÂ·3) + float64(@"time".nsecÂ·4) * 7198262071269114660816079141112770740375861891461678802759824945047098083990024106014198994535558872472104883612039846078596891298747423852523262413111296p-541 }
+	func (@"time".dÂ·2 @"time".Duration) String () (? string)
+	type @"time".Month int
+	func (@"time".mÂ·2 @"time".Month) String () (? string) { return @"time".months[@"time".mÂ·2 - @"time".Month(0x1)] }
+	type @"time".Weekday int
+	func (@"time".dÂ·2 @"time".Weekday) String () (? string) { return @"time".days[@"time".dÂ·2] }
+	type @"time".Time struct { @"time".sec int64; @"time".nsec int32; @"time".loc *@"time".Location }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Add (@"time".dÂ·3 @"time".Duration) (? @"time".Time) { @"time".tÂ·2.@"time".sec += int64(@"time".dÂ·3 / @"time".Duration(0x3b9aca00)); var @"time".nsecÂ·4 int32; ; @"time".nsecÂ·4 = int32(@"time".tÂ·2.@"time".nsec) + int32(@"time".dÂ·3 % @"time".Duration(0x3b9aca00)); if @"time".nsecÂ·4 >= 0x3b9aca00 { @"time".tÂ·2.@"time".sec++; @"time".nsecÂ·4 -= 0x3b9aca00 } else { if @"time".nsecÂ·4 < 0x0 { @"time".tÂ·2.@"time".sec--; @"time".nsecÂ·4 += 0x3b9aca00 } }; @"time".tÂ·2.@"time".nsec = @"time".nsecÂ·4; return @"time".tÂ·2 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") AddDate (@"time".yearsÂ·3 int, @"time".monthsÂ·4 int, @"time".daysÂ·5 int) (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") After (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec > @"time".uÂ·3.@"time".sec || @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec > @"time".uÂ·3.@"time".nsec }
+	func (@"time".tÂ·2 @"time".Time "esc:0x9") AppendFormat (@"time".bÂ·3 []byte "esc:0x1a", @"time".layoutÂ·4 string "esc:0x9") (? []byte)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Before (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec < @"time".uÂ·3.@"time".sec || @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec < @"time".uÂ·3.@"time".nsec }
+	func (@"time".tÂ·4 @"time".Time "esc:0x1") Clock () (@"time".hourÂ·1 int, @"time".minÂ·2 int, @"time".secÂ·3 int)
+	func (@"time".tÂ·4 @"time".Time "esc:0x1") Date () (@"time".yearÂ·1 int, @"time".monthÂ·2 @"time".Month, @"time".dayÂ·3 int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Day () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Equal (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec == @"time".uÂ·3.@"time".nsec }
+	func (@"time".tÂ·2 @"time".Time "esc:0x9") Format (@"time".layoutÂ·3 string "esc:0x9") (? string)
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") GobDecode (@"time".dataÂ·3 []byte "esc:0x1") (? error)
+	func (@"time".tÂ·3 @"time".Time "esc:0x1") GobEncode () (? []byte, ? error)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Hour () (? int)
+	func (@"time".tÂ·3 @"time".Time "esc:0x1") ISOWeek () (@"time".yearÂ·1 int, @"time".weekÂ·2 int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") In (@"time".locÂ·3 *@"time".Location "esc:0x12") (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") IsZero () (? bool) { return @"time".tÂ·2.@"time".sec == 0x0 && @"time".tÂ·2.@"time".nsec == 0x0 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Local () (? @"time".Time) { @"time".tÂ·2.@"time".loc = @"time".Local; return @"time".tÂ·2 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Location () (? *@"time".Location) { var @"time".lÂ·3 *@"time".Location; ; @"time".lÂ·3 = @"time".tÂ·2.@"time".loc; if @"time".lÂ·3 == nil { @"time".lÂ·3 = @"time".UTC }; return @"time".lÂ·3 }
+	func (@"time".tÂ·3 @"time".Time "esc:0x1") MarshalBinary () (? []byte, ? error)
+	func (@"time".tÂ·3 @"time".Time "esc:0x9") MarshalJSON () (? []byte, ? error)
+	func (@"time".tÂ·3 @"time".Time "esc:0x9") MarshalText () (? []byte, ? error)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Minute () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Month () (? @"time".Month)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Nanosecond () (? int) { return int(@"time".tÂ·2.@"time".nsec) }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Round (@"time".dÂ·3 @"time".Duration) (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Second () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x9") String () (? string)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Sub (@"time".uÂ·3 @"time".Time "esc:0x1") (? @"time".Duration)
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Truncate (@"time".dÂ·3 @"time".Duration) (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") UTC () (? @"time".Time) { @"time".tÂ·2.@"time".loc = @"time".UTC; return @"time".tÂ·2 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Unix () (? int64) { return @"time".tÂ·2.@"time".sec + -0xe7791f700 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") UnixNano () (? int64) { return (@"time".tÂ·2.@"time".sec + -0xe7791f700) * 0x3b9aca00 + int64(@"time".tÂ·2.@"time".nsec) }
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalBinary (@"time".dataÂ·3 []byte "esc:0x1") (? error)
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalJSON (@"time".dataÂ·3 []byte "esc:0x1") (@"time".errÂ·1 error)
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalText (@"time".dataÂ·3 []byte "esc:0x1") (@"time".errÂ·1 error)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Weekday () (? @"time".Weekday)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Year () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") YearDay () (? int)
+	func (@"time".tÂ·3 @"time".Time "esc:0x32") Zone () (@"time".nameÂ·1 string, @"time".offsetÂ·2 int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") @"time".abs () (? uint64)
+	func (@"time".tÂ·5 @"time".Time "esc:0x1") @"time".date (@"time".fullÂ·6 bool) (@"time".yearÂ·1 int, @"time".monthÂ·2 @"time".Month, @"time".dayÂ·3 int, @"time".ydayÂ·4 int)
+	func (@"time".tÂ·4 @"time".Time "esc:0x32") @"time".locabs () (@"time".nameÂ·1 string, @"time".offsetÂ·2 int, @"time".absÂ·3 uint64)
+	type @"".UserFriendRequest struct { UserFriendRequestId int "gorm:\"primary_key; auto_increment\" json:\"userFriendRequestId\""; UserId int "sql:\"not null\" json:\"userId\""; FriendId int "sql:\"not null\" json:\"friendId\""; Status string "sql:\"not null\" json:\"status\""; CreatedAt @"time".Time "json:\"createdAt\""; UpdatedAt @"time".Time "json:\"updatedAt\"" }
+	const @"".Sent = "SENT"
+	const @"".Pending = "PENDING"
+	const @"".Accept = "ACCEPT"
+	const @"".Reject = "REJECT"
+	const @"".Cancel = "CANCEL"
+	func @"".Create (@"".userIdÂ·1 int, @"".friendEmailÂ·2 string, @"".statusÂ·3 string "esc:0x1")
+	func @"".Update (@"".userIdÂ·1 int, @"".friendIdÂ·2 int, @"".statusÂ·3 string)
+	func @"".Read (@"".userIdÂ·2 int) (? []@"".UserFriendRequest)
+	func @"".init ()
+	var @"time".months [12]string
+	var @"time".days [7]string
+	var @"time".Local *@"time".Location
+	var @"time".UTC *@"time".Location
+
+$$
+_go_.o          0           0     0     644     45339     `
+go object darwin amd64 go1.5.3 X:none
+
+!
+  go13ldmodel.atime.amodel/user.a$model/userfriend.a ş"".Create  €A  €AeH‹%    H„$0ıÿÿH;A†  HìP  1ÀH¼$À  è    H‹„$x  Hƒø…  H‹¬$p  H‰,$H‰D$H-    H‰l$HÇD$   è    ¶\$ €û „e  H‹œ$`  H‰$H‹œ$h  H‰\$è    H\$H¼$°  H‰Şè    H‹œ$°  H‰œ$°   H    H‰$è    H‹|$H‰¼$à   1ÀHƒÇøè    H    H‰$è    H‹|$H‰¼$è   1ÀHƒÇøè    H    H‰œ$(  HÇ„$0     H‹œ$X  H‰œ$À   H‹œ$°   H‰œ$¸   H    H‰$è    H‹\$Hƒû „Æ  HÇ„$@     HÇ„$H     H‰œ$8  H    H‰$Hœ$À   H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$8  H‰Œ$ø   H‰H‰„$   €=     …7  H‰CH    H‰$Hœ$¸   H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$8  HƒÃH‰Œ$ø   H‰H‰„$   €=     …À  H‰CH    H‰$Hœ$(  H‰\$HÇD$    è    H\$H|$H‹H‰H‹KH‰OH‹    H‰$H‹œ$8  H‰\$H‹œ$@  H‰\$ H‹œ$H  H‰\$(è    H‹L$0H‹„$à   H‰$H    H‰œ$ø   H‰\$H‰„$   H‰D$1ÛH‰\$H‰\$ H‰\$(è    H    H‰œ$(  HÇ„$0     H‹œ$°   H‰œ$À   H‹œ$X  H‰œ$¸   H    H‰$è    H‹\$Hƒû „  HÇ„$@     HÇ„$H     H‰œ$8  H    H‰$Hœ$À   H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$8  H‰Œ$ø   H‰H‰„$   €=     …  H‰CH    H‰$Hœ$¸   H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$8  HƒÃH‰Œ$ø   H‰H‰„$   €=     …˜  H‰CH    H‰$Hœ$(  H‰\$HÇD$    è    H\$H|$H‹H‰H‹KH‰OH‹    H‰$H‹œ$8  H‰\$H‹œ$@  H‰\$ H‹œ$H  H‰\$(è    H‹L$0H‹„$è   H‰$H    H‰œ$ø   H‰\$H‰„$   H‰D$1ÛH‰\$H‰\$ H‰\$(è    H‹´$à   H¼$X  è    H¼$   1ÀHƒÇøè    Hœ$X  H‰ÙHœ$   H‰$H‰\$è    ¶\$€û „»  H    H‰$è    H‹|$H‰ù1ÀHƒÇøè    H‹¬$X  H‰iH‹¬$°   H‰iH‰Œ$Ø   H-    H‰iHÇA    è    H‹$‹L$H‹D$H‹œ$Ø   H‰”$h  H‰S(‰Œ$p  ‰K0H‰„$x  €=     …	  H‰C8è    H‹$‹L$H‹D$H‹œ$Ø   H‰”$h  H‰S@‰Œ$p  ‰KHH‰„$x  €=     …©  H‰CPH‹„$Ø   H‹    H‰$H    H‰Œ$ø   H‰L$H‰„$   H‰D$è    H‹´$è   H¼$   è    H¼$X  1ÀHƒÇøè    Hœ$   H‰ØHœ$X  H‰$H‰\$è    ¶\$€û „P  H    H‰$è    H‹|$H‰ù1ÀHƒÇøè    H‹¬$°   H‰iH‹¬$X  H‰iH‰Œ$ğ   H-    H‰iHÇA    è    H‹$‹L$H‹D$H‹œ$ğ   H‰”$h  H‰S(‰Œ$p  ‰K0H‰„$x  €=     …   H‰C8è    H‹$‹L$H‹D$H‹œ$ğ   H‰”$h  H‰S@‰Œ$p  ‰KHH‰„$x  €=     uEH‰CPH‹„$ğ   H‹    H‰$H    H‰Œ$ø   H‰L$H‰„$   H‰D$è    HÄP  ÃLCPL‰$H‰D$è    ë«LC8L‰$H‰D$è    éOÿÿÿH‹„$è   H‹    H‰$H    H‰Œ$ø   H‰L$H‰„$   H‰D$è    H‹\$H‰œ$È   H    H‰œ$  HÇ„$     H    H‰œ$(  HÇ„$0     1ÛH‰œ$   H‰œ$¨  H‰œ$°  H‰œ$¸  Hœ$   Hƒû „  HÇ„$@     HÇ„$H     H‰œ$8  H    H‰$Hœ$  H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$8  H‰Œ$ø   H‰H‰„$   €=     …  H‰CH    H‰$Hœ$(  H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$8  HƒÃH‰Œ$ø   H‰H‰„$   €=     …  H‰CH‹œ$È   H‰$H‹œ$8  H‰\$H‹œ$@  H‰\$H‹œ$H  H‰\$è    H‹\$ H‰œ$Ğ   H    H‰œ$  HÇ„$   
+   è    H‹$H‰œ$P  ‹\$‰œ$X  H‹\$H‰œ$`  1ÛH‰œ$€  H‰œ$ˆ  H‰œ$  H‰œ$˜  Hœ$€  Hƒû „@  HÇ„$@     HÇ„$H     H‰œ$8  H    H‰$Hœ$  H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$8  H‰Œ$ø   H‰H‰„$   €=     …±   H‰CH    H‰$Hœ$P  H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$8  HƒÃH‰Œ$ø   H‰H‰„$   €=     uAH‰CH‹œ$Ğ   H‰$H‹œ$8  H‰\$H‹œ$@  H‰\$H‹œ$H  H‰\$è    éoüÿÿLCL‰$H‰D$è    ë¯LCL‰$H‰D$è    é<ÿÿÿ‰é¹şÿÿLCL‰$H‰D$è    éåıÿÿLCL‰$H‰D$è    énıÿÿ‰éëüÿÿLCPL‰$H‰D$è    éDúÿÿLC8L‰$H‰D$è    éäùÿÿH‹„$à   H‹    H‰$H    H‰Œ$ø   H‰L$H‰„$   H‰D$è    H‹\$H‰œ$Ğ   H    H‰œ$(  HÇ„$0     H    H‰œ$  HÇ„$      1ÛH‰œ$à  H‰œ$è  H‰œ$ğ  H‰œ$ø  Hœ$à  Hƒû „  HÇ„$@     HÇ„$H     H‰œ$8  H    H‰$Hœ$(  H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$8  H‰Œ$ø   H‰H‰„$   €=     …  H‰CH    H‰$Hœ$  H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$8  HƒÃH‰Œ$ø   H‰H‰„$   €=     …  H‰CH‹œ$Ğ   H‰$H‹œ$8  H‰\$H‹œ$@  H‰\$H‹œ$H  H‰\$è    H‹\$ H‰œ$È   H    H‰œ$  HÇ„$  
+   è    H‹$H‰œ$P  ‹\$‰œ$X  H‹\$H‰œ$`  1ÛH‰œ$À  H‰œ$È  H‰œ$Ğ  H‰œ$Ø  Hœ$À  Hƒû „@  HÇ„$@     HÇ„$H     H‰œ$8  H    H‰$Hœ$  H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$8  H‰Œ$ø   H‰H‰„$   €=     …±   H‰CH    H‰$Hœ$P  H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$8  HƒÃH‰Œ$ø   H‰H‰„$   €=     uAH‰CH‹œ$È   H‰$H‹œ$8  H‰\$H‹œ$@  H‰\$H‹œ$H  H‰\$è    é÷ÿÿLCL‰$H‰D$è    ë¯LCL‰$H‰D$è    é<ÿÿÿ‰é¹şÿÿLCL‰$H‰D$è    éåıÿÿLCL‰$H‰D$è    énıÿÿ‰éëüÿÿLCL‰$H‰D$è    éUôÿÿLCL‰$H‰D$è    éŞóÿÿ‰é[óÿÿLCL‰$H‰D$è    é-òÿÿLCL‰$H‰D$è    é¶ñÿÿ‰é3ñÿÿè    éÀïÿÿ‚
+      Z
+ô  runtime.duffzero   ®   go.string."SENT"   Ô
+   runtime.eqstring   ¬
+  6model/user.GetOrCreateDummy   Ö
+Ğ  runtime.duffcopy   „  2type."".UserFriendRequest   –
+  "runtime.newobject   Æ
+Ô  runtime.duffzero   Ô  2type."".UserFriendRequest   æ
+  "runtime.newobject   –
+Ô  runtime.duffzero   ¤  Rgo.string."user_id = ? and friend_id = ?"   š  (type.[2]interface {}   ¬
+  "runtime.newobject   ˜  type.int   Ö
+  runtime.convT2E   ¬ 6runtime.writeBarrierEnabled   Ğ  type.int   
+  runtime.convT2E   ì 6runtime.writeBarrierEnabled   	  type.string   Î	
+  runtime.convT2E   Œ
+  model.Db   ì
+
+  Dgithub.com/jinzhu/gorm.(*DB).Where   œ  4type.*"".UserFriendRequest   ü
+  Dgithub.com/jinzhu/gorm.(*DB).First   Š  Rgo.string."user_id = ? and friend_id = ?"   €  (type.[2]interface {}   ’
+  "runtime.newobject   ş  type.int   ¼
+  runtime.convT2E   ’ 6runtime.writeBarrierEnabled   ¶  type.int   ô
+  runtime.convT2E   Ò 6runtime.writeBarrierEnabled   ö  type.string   ´
+  runtime.convT2E   ò  model.Db   Ò
+  Dgithub.com/jinzhu/gorm.(*DB).Where   ‚  4type.*"".UserFriendRequest   â
+  Dgithub.com/jinzhu/gorm.(*DB).First   Œ
+Ì  runtime.duffcopy   ²
+Ô  runtime.duffzero   ô
+  :type..eq."".UserFriendRequest     2type."".UserFriendRequest   °
+  "runtime.newobject   Ö
+Ô  runtime.duffzero   ¤   go.string."SENT"   Æ
+  time.Now   ¸ 6runtime.writeBarrierEnabled   Ø
+  time.Now   Ê 6runtime.writeBarrierEnabled   ş  model.Db   ”  4type.*"".UserFriendRequest   Ò
+  Fgithub.com/jinzhu/gorm.(*DB).Create   ü
+Ì  runtime.duffcopy   ¢
+Ô  runtime.duffzero   ä
+  :type..eq."".UserFriendRequest     2type."".UserFriendRequest    
+  "runtime.newobject   Æ
+Ô  runtime.duffzero   ”  &go.string."PENDING"   ¶
+  time.Now   ¨ 6runtime.writeBarrierEnabled   È
+  time.Now   º 6runtime.writeBarrierEnabled   æ  model.Db   ü  4type.*"".UserFriendRequest   º
+  Fgithub.com/jinzhu/gorm.(*DB).Create   î
+  .runtime.writebarrierptr   – 
+  .runtime.writebarrierptr   ¾   model.Db   Ô   4type.*"".UserFriendRequest   ’!
+  Dgithub.com/jinzhu/gorm.(*DB).Model   º!  $go.string."status"   ğ!  &go.string."PENDING"   Î#  type.string   Œ$
+  runtime.convT2E   â$ 6runtime.writeBarrierEnabled   †%  type.string   Ä%
+  runtime.convT2E   ¢& 6runtime.writeBarrierEnabled   ¨'
+  Fgithub.com/jinzhu/gorm.(*DB).Update   Ğ'  ,go.string."updated_at"   ‚(
+  time.Now   €*  type.string   ¾*
+  runtime.convT2E   ”+ 6runtime.writeBarrierEnabled   ¸+  type.time.Time   ö+
+  runtime.convT2E   Ô, 6runtime.writeBarrierEnabled   Ò-
+  Fgithub.com/jinzhu/gorm.(*DB).Update   €.
+  .runtime.writebarrierptr   ¨.
+  .runtime.writebarrierptr   ä.
+  .runtime.writebarrierptr   ’/
+  .runtime.writebarrierptr   Î/
+  .runtime.writebarrierptr   ü/
+  .runtime.writebarrierptr   ¤0  model.Db   º0  4type.*"".UserFriendRequest   ø0
+  Dgithub.com/jinzhu/gorm.(*DB).Model    1  $go.string."status"   Ö1   go.string."SENT"   ´3  type.string   ò3
+  runtime.convT2E   È4 6runtime.writeBarrierEnabled   ì4  type.string   ª5
+  runtime.convT2E   ˆ6 6runtime.writeBarrierEnabled   7
+  Fgithub.com/jinzhu/gorm.(*DB).Update   ¶7  ,go.string."updated_at"   è7
+  time.Now   æ9  type.string   ¤:
+  runtime.convT2E   ú: 6runtime.writeBarrierEnabled   ;  type.time.Time   Ü;
+  runtime.convT2E   º< 6runtime.writeBarrierEnabled   ¸=
+  Fgithub.com/jinzhu/gorm.(*DB).Update   æ=
+  .runtime.writebarrierptr   >
+  .runtime.writebarrierptr   Ê>
+  .runtime.writebarrierptr   ø>
+  .runtime.writebarrierptr   ´?
+  .runtime.writebarrierptr   â?
+  .runtime.writebarrierptr   @
+  .runtime.writebarrierptr   Ì@
+  .runtime.writebarrierptr   î@
+  0runtime.morestack_noctxt   P   "".autotmp_0076  "type.interface {} "".autotmp_0075  "type.interface {} "".autotmp_0074 Ÿ(type.[2]interface {} "".autotmp_0072  *type.*[2]interface {} "".autotmp_0071  &type.[]interface {} "".autotmp_0070  "type.interface {} "".autotmp_0069  "type.interface {} "".autotmp_0068 ß(type.[2]interface {} "".autotmp_0066  *type.*[2]interface {} "".autotmp_0065  &type.[]interface {} "".autotmp_0064  4type.*"".UserFriendRequest "".autotmp_0063  4type.*"".UserFriendRequest "".autotmp_0062  "type.interface {} "".autotmp_0061  "type.interface {} "".autotmp_0060 Ÿ(type.[2]interface {} "".autotmp_0058  *type.*[2]interface {} "".autotmp_0057  &type.[]interface {} "".autotmp_0056  "type.interface {} "".autotmp_0055  "type.interface {} "".autotmp_0054 ß(type.[2]interface {} "".autotmp_0052  *type.*[2]interface {} "".autotmp_0051  &type.[]interface {} "".autotmp_0049  4type.*"".UserFriendRequest "".autotmp_0048  "type.interface {} "".autotmp_0047  "type.interface {} "".autotmp_0046  *type.*[2]interface {} "".autotmp_0045  &type.[]interface {} "".autotmp_0044  "type.interface {} "".autotmp_0043 ¯	"type.interface {} "".autotmp_0041 ¯&type.[]interface {} "".autotmp_0040  type.time.Time "".autotmp_0039  type.string "".autotmp_0038  >type.*github.com/jinzhu/gorm.DB "".autotmp_0037  type.string "".autotmp_0036  type.string "".autotmp_0035  >type.*github.com/jinzhu/gorm.DB "".autotmp_0034  4type.*"".UserFriendRequest "".autotmp_0033  4type.*"".UserFriendRequest "".autotmp_0032  type.time.Time "".autotmp_0031  type.time.Time "".autotmp_0030  2type."".UserFriendRequest "".autotmp_0029  2type."".UserFriendRequest "".autotmp_0028 ÿtype.time.Time "".autotmp_0027 	type.string "".autotmp_0026 
+>type.*github.com/jinzhu/gorm.DB "".autotmp_0025 ïtype.string "".autotmp_0024  type.string "".autotmp_0023  >type.*github.com/jinzhu/gorm.DB "".autotmp_0022  4type.*"".UserFriendRequest "".autotmp_0021  4type.*"".UserFriendRequest "".autotmp_0020  type.time.Time "".autotmp_0019 Ïtype.time.Time "".autotmp_0018 Ÿ2type."".UserFriendRequest "".autotmp_0017 ï2type."".UserFriendRequest "".autotmp_0016  4type.*"".UserFriendRequest "".autotmp_0015  >type.*github.com/jinzhu/gorm.DB "".autotmp_0014  type.int "".autotmp_0013  type.int "".autotmp_0012  type.string "".autotmp_0010 ÿ	>type.*github.com/jinzhu/gorm.DB "".autotmp_0009 ¯
+type.int "".autotmp_0008 Ÿ
+type.int "".autotmp_0007 Ïtype.string *"".&friendUserRequest ¿	4type.*"".UserFriendRequest *"".&userFriendRequest ï	4type.*"".UserFriendRequest *"".&friendUserRequest Ï	4type.*"".UserFriendRequest *"".&userFriendRequest ß	4type.*"".UserFriendRequest "".friendId ¿
+type.int "".friend ¿(type.model/user.User "".status 0type.string "".friendEmail type.string "".userId  type.int " ÆŸ × À  ²89C3((óóW#II9
+W#IE9
+ÙgÙg55
+ ¬ i‰cU‹è‹‘KÆIKÂR½Î-Ê25U½Î-Ê25g TgclocalsÂ·f245f7dbbe6cb5d54b812b361f791099 TgclocalsÂ·f445c8d3f4cb607fb160317f601f85aa   °/Users/mitesh/Personal/bitbucket/go-web/src/model/userfriendrequest/userfriendrequest.goş"".Update   P  †PeH‹%    H„$¨şÿÿH;A†Ş  HìØ  H    H‰$è    H‹|$H‰|$X1ÀHƒÇøè    H    H‰$è    H‹|$H‰|$`1ÀHƒÇøè    H    H‰œ$˜   HÇ„$       H‹œ$à  H‰\$@H‹œ$è  H‰\$8H    H‰$è    H‹\$Hƒû „2  HÇ„$°      HÇ„$¸      H‰œ$¨   H    H‰$H\$@H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   H‰L$hH‰H‰D$p€=     …¬  H‰CH    H‰$H\$8H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   HƒÃH‰L$hH‰H‰D$p€=     …>  H‰CH    H‰$Hœ$˜   H‰\$HÇD$    è    H\$H|$H‹H‰H‹KH‰OH‹    H‰$H‹œ$¨   H‰\$H‹œ$°   H‰\$ H‹œ$¸   H‰\$(è    H‹L$0H‹D$XH‰$H    H‰\$hH‰\$H‰D$pH‰D$1ÛH‰\$H‰\$ H‰\$(è    H    H‰œ$˜   HÇ„$       H‹œ$è  H‰\$@H‹œ$à  H‰\$8H    H‰$è    H‹\$Hƒû „+  HÇ„$°      HÇ„$¸      H‰œ$¨   H    H‰$H\$@H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   H‰L$hH‰H‰D$p€=     …¥  H‰CH    H‰$H\$8H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   HƒÃH‰L$hH‰H‰D$p€=     …7  H‰CH    H‰$Hœ$˜   H‰\$HÇD$    è    H\$H|$H‹H‰H‹KH‰OH‹    H‰$H‹œ$¨   H‰\$H‹œ$°   H‰\$ H‹œ$¸   H‰\$(è    H‹L$0H‹D$`H‰$H    H‰\$hH‰\$H‰D$pH‰D$1ÛH‰\$H‰\$ H‰\$(è    H‹„$ø  Hƒø…t  H‹¬$ğ  H‰,$H‰D$H-    H‰l$HÇD$   è    H‹„$ø  ¶\$ €û „3  H‹D$XH‹    H‰$H    H‰L$hH‰L$H‰D$pH‰D$è    H‹\$H‰\$PH    H‰œ$˜   HÇ„$       H‹œ$ğ  H‰œ$ˆ   H‹œ$ø  H‰œ$   1ÛH‰œ$¸  H‰œ$À  H‰œ$È  H‰œ$Ğ  Hœ$¸  Hƒû „ƒ  HÇ„$°      HÇ„$¸      H‰œ$¨   H    H‰$Hœ$˜   H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   H‰L$hH‰H‰D$p€=     …ú  H‰CH    H‰$Hœ$ˆ   H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   HƒÃH‰L$hH‰H‰D$p€=     …‰  H‰CH‹\$PH‰$H‹œ$¨   H‰\$H‹œ$°   H‰\$H‹œ$¸   H‰\$è    H‹\$ H‰\$HH    H‰\$xHÇ„$€   
+   è    H‹$H‰œ$À   ‹\$‰œ$È   H‹\$H‰œ$Ğ   1ÛH‰œ$˜  H‰œ$   H‰œ$¨  H‰œ$°  Hœ$˜  Hƒû „Ê  HÇ„$°      HÇ„$¸      H‰œ$¨   H    H‰$H\$xH‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   H‰L$hH‰H‰D$p€=     …D  H‰CH    H‰$Hœ$À   H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   HƒÃH‰L$hH‰H‰D$p€=     …Ó  H‰CH‹\$HH‰$H‹œ$¨   H‰\$H‹œ$°   H‰\$H‹œ$¸   H‰\$è    H‹D$`H‹    H‰$H    H‰L$hH‰L$H‰D$pH‰D$è    H‹\$H‰\$HH    H‰œ$ˆ   HÇ„$      H‹œ$ğ  H‰\$xH‹œ$ø  H‰œ$€   1ÛH‰œ$x  H‰œ$€  H‰œ$ˆ  H‰œ$  Hœ$x  Hƒû „í  HÇ„$°      HÇ„$¸      H‰œ$¨   H    H‰$Hœ$ˆ   H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   H‰L$hH‰H‰D$p€=     …d  H‰CH    H‰$H\$xH‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   HƒÃH‰L$hH‰H‰D$p€=     …ö  H‰CH‹\$HH‰$H‹œ$¨   H‰\$H‹œ$°   H‰\$H‹œ$¸   H‰\$è    H‹\$ H‰\$PH    H‰œ$˜   HÇ„$    
+   è    H‹$H‰œ$À   ‹\$‰œ$È   H‹\$H‰œ$Ğ   1ÛH‰œ$X  H‰œ$`  H‰œ$h  H‰œ$p  Hœ$X  Hƒû „4  HÇ„$°      HÇ„$¸      H‰œ$¨   H    H‰$Hœ$˜   H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   H‰L$hH‰H‰D$p€=     …«   H‰CH    H‰$Hœ$À   H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   HƒÃH‰L$hH‰H‰D$p€=     uAH‰CH‹\$PH‰$H‹œ$¨   H‰\$H‹œ$°   H‰\$H‹œ$¸   H‰\$è    HÄØ  ÃLCL‰$H‰D$è    ë¯LCL‰$H‰D$è    éBÿÿÿ‰éÅşÿÿLCL‰$H‰D$è    é÷ıÿÿLCL‰$H‰D$è    é‰ıÿÿ‰éıÿÿLCL‰$H‰D$è    éüÿÿLCL‰$H‰D$è    é©ûÿÿ‰é/ûÿÿLCL‰$H‰D$è    édúÿÿLCL‰$H‰D$è    éóùÿÿ‰évùÿÿHƒøuAH‹¬$ğ  H‰,$H‰D$H-    H‰l$HÇD$   è    H‹„$ø  ¶\$ €û …†øÿÿHƒø…ÖşÿÿH‹¬$ğ  H‰,$H‰D$H-    H‰l$HÇD$   è    ¶\$ €û „şÿÿH‹D$XH‹    H‰$H    H‰L$hH‰L$H‰D$pH‰D$è    H‹\$H‰\$PH    H‰\$xHÇ„$€      H‹œ$ğ  H‰œ$˜   H‹œ$ø  H‰œ$    1ÛH‰œ$8  H‰œ$@  H‰œ$H  H‰œ$P  Hœ$8  Hƒû „Â  HÇ„$°      HÇ„$¸      H‰œ$¨   H    H‰$H\$xH‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   H‰L$hH‰H‰D$p€=     …<  H‰CH    H‰$Hœ$˜   H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   HƒÃH‰L$hH‰H‰D$p€=     …Ë  H‰CH‹\$PH‰$H‹œ$¨   H‰\$H‹œ$°   H‰\$H‹œ$¸   H‰\$è    H‹\$ H‰\$HH    H‰œ$ˆ   HÇ„$   
+   è    H‹$H‰œ$À   ‹\$‰œ$È   H‹\$H‰œ$Ğ   1ÛH‰œ$  H‰œ$   H‰œ$(  H‰œ$0  Hœ$  Hƒû „	  HÇ„$°      HÇ„$¸      H‰œ$¨   H    H‰$Hœ$ˆ   H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   H‰L$hH‰H‰D$p€=     …€  H‰CH    H‰$Hœ$À   H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   HƒÃH‰L$hH‰H‰D$p€=     …  H‰CH‹\$HH‰$H‹œ$¨   H‰\$H‹œ$°   H‰\$H‹œ$¸   H‰\$è    H‹D$`H‹    H‰$H    H‰L$hH‰L$H‰D$pH‰D$è    H‹\$H‰\$HH    H‰œ$˜   HÇ„$       H‹œ$ğ  H‰œ$ˆ   H‹œ$ø  H‰œ$   1ÛH‰œ$ø   H‰œ$   H‰œ$  H‰œ$  Hœ$ø   Hƒû „&  HÇ„$°      HÇ„$¸      H‰œ$¨   H    H‰$Hœ$˜   H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   H‰L$hH‰H‰D$p€=     …  H‰CH    H‰$Hœ$ˆ   H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   HƒÃH‰L$hH‰H‰D$p€=     …,  H‰CH‹\$HH‰$H‹œ$¨   H‰\$H‹œ$°   H‰\$H‹œ$¸   H‰\$è    H‹\$ H‰\$PH    H‰\$xHÇ„$€   
+   è    H‹$H‰œ$À   ‹\$‰œ$È   H‹\$H‰œ$Ğ   1ÛH‰œ$Ø   H‰œ$à   H‰œ$è   H‰œ$ğ   Hœ$Ø   Hƒû „m  HÇ„$°      HÇ„$¸      H‰œ$¨   H    H‰$H\$xH‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   H‰L$hH‰H‰D$p€=     …ç   H‰CH    H‰$Hœ$À   H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   HƒÃH‰L$hH‰H‰D$p€=     uzH‰CH‹\$PH‰$H‹œ$¨   H‰\$H‹œ$°   H‰\$H‹œ$¸   H‰\$è    H‹œ$à  H‰$H‹œ$è  H‰\$è    H‹œ$è  H‰$H‹œ$à  H‰\$è    éøÿÿLCL‰$H‰D$è    ésÿÿÿLCL‰$H‰D$è    éÿÿÿ‰éŒşÿÿLCL‰$H‰D$è    éÁıÿÿLCL‰$H‰D$è    éPıÿÿ‰éÓüÿÿLCL‰$H‰D$è    éŞûÿÿLCL‰$H‰D$è    émûÿÿ‰éğúÿÿLCL‰$H‰D$è    é"úÿÿLCL‰$H‰D$è    é±ùÿÿ‰é7ùÿÿLCL‰$H‰D$è    é¶ïÿÿLCL‰$H‰D$è    éHïÿÿ‰éÎîÿÿLCL‰$H‰D$è    é¯íÿÿLCL‰$H‰D$è    éAíÿÿ‰éÇìÿÿè    éıëÿÿ¤
+      J  2type."".UserFriendRequest   \
+  "runtime.newobject   †
+Ô  runtime.duffzero   ”  2type."".UserFriendRequest   ¦
+  "runtime.newobject   Ğ
+Ô  runtime.duffzero   Ş  Rgo.string."user_id = ? and friend_id = ?"   È  (type.[2]interface {}   Ú
+  "runtime.newobject   Æ  type.int   ş
+  runtime.convT2E   È 6runtime.writeBarrierEnabled   ì  type.int   ¤
+  runtime.convT2E   ö 6runtime.writeBarrierEnabled   š  type.string   Ø
+  runtime.convT2E   –  model.Db   ö
+  Dgithub.com/jinzhu/gorm.(*DB).Where      4type.*"".UserFriendRequest   ô
+  Dgithub.com/jinzhu/gorm.(*DB).First   ‚	  Rgo.string."user_id = ? and friend_id = ?"   ì	  (type.[2]interface {}   ş	
+  "runtime.newobject   ê
+  type.int   ¢
+  runtime.convT2E   ì 6runtime.writeBarrierEnabled     type.int   È
+  runtime.convT2E   š 6runtime.writeBarrierEnabled   ¾  type.string   ü
+  runtime.convT2E   º  model.Db   š
+  Dgithub.com/jinzhu/gorm.(*DB).Where   Ä  4type.*"".UserFriendRequest   ˜
+  Dgithub.com/jinzhu/gorm.(*DB).First   ì  $go.string."REJECT"   ’
+   runtime.eqstring   Ö  model.Db   ì  4type.*"".UserFriendRequest   
+  Dgithub.com/jinzhu/gorm.(*DB).Model   À  $go.string."status"   Ş  type.string   œ
+  runtime.convT2E   æ 6runtime.writeBarrierEnabled   Š  type.string   È
+  runtime.convT2E   š 6runtime.writeBarrierEnabled   š
+  Fgithub.com/jinzhu/gorm.(*DB).Update   ¼  ,go.string."updated_at"   è
+  time.Now   æ  type.string   
+  runtime.convT2E   è 6runtime.writeBarrierEnabled   Œ  type.time.Time   Ê
+  runtime.convT2E   œ 6runtime.writeBarrierEnabled   œ
+  Fgithub.com/jinzhu/gorm.(*DB).Update   ´  model.Db   Ê  4type.*"".UserFriendRequest   ü
+  Dgithub.com/jinzhu/gorm.(*DB).Model     $go.string."status"   ¶!  type.string   ô!
+  runtime.convT2E   ¾" 6runtime.writeBarrierEnabled   â"  type.string   š#
+  runtime.convT2E   ì# 6runtime.writeBarrierEnabled   ì$
+  Fgithub.com/jinzhu/gorm.(*DB).Update   %  ,go.string."updated_at"   À%
+  time.Now   ¾'  type.string   ü'
+  runtime.convT2E   Æ( 6runtime.writeBarrierEnabled   ê(  type.time.Time   ¨)
+  runtime.convT2E   ú) 6runtime.writeBarrierEnabled   ò*
+  Fgithub.com/jinzhu/gorm.(*DB).Update   ¦+
+  .runtime.writebarrierptr   Î+
+  .runtime.writebarrierptr   Š,
+  .runtime.writebarrierptr   ¸,
+  .runtime.writebarrierptr   ô,
+  .runtime.writebarrierptr   ¢-
+  .runtime.writebarrierptr   Ş-
+  .runtime.writebarrierptr   Œ.
+  .runtime.writebarrierptr   à.  $go.string."CANCEL"   †/
+   runtime.eqstring   ö/  $go.string."ACCEPT"   œ0
+   runtime.eqstring   Ğ0  model.Db   æ0  4type.*"".UserFriendRequest   ˜1
+  Dgithub.com/jinzhu/gorm.(*DB).Model   º1  $go.string."status"   Ò3  type.string   Š4
+  runtime.convT2E   Ô4 6runtime.writeBarrierEnabled   ø4  type.string   ¶5
+  runtime.convT2E   ˆ6 6runtime.writeBarrierEnabled   ˆ7
+  Fgithub.com/jinzhu/gorm.(*DB).Update   ª7  ,go.string."updated_at"   Ü7
+  time.Now   Ú9  type.string   ˜:
+  runtime.convT2E   â: 6runtime.writeBarrierEnabled   †;  type.time.Time   Ä;
+  runtime.convT2E   –< 6runtime.writeBarrierEnabled   –=
+  Fgithub.com/jinzhu/gorm.(*DB).Update   ®=  model.Db   Ä=  4type.*"".UserFriendRequest   ö=
+  Dgithub.com/jinzhu/gorm.(*DB).Model   ˜>  $go.string."status"   ¶@  type.string   ô@
+  runtime.convT2E   ¾A 6runtime.writeBarrierEnabled   âA  type.string    B
+  runtime.convT2E   òB 6runtime.writeBarrierEnabled   òC
+  Fgithub.com/jinzhu/gorm.(*DB).Update   ”D  ,go.string."updated_at"   ÀD
+  time.Now   ¾F  type.string   öF
+  runtime.convT2E   ÀG 6runtime.writeBarrierEnabled   äG  type.time.Time   ¢H
+  runtime.convT2E   ôH 6runtime.writeBarrierEnabled   ìI
+  Fgithub.com/jinzhu/gorm.(*DB).Update   ¨J
+  .model/userfriend.Create   äJ
+  .model/userfriend.Create   ’K
+  .runtime.writebarrierptr   ÀK
+  .runtime.writebarrierptr   üK
+  .runtime.writebarrierptr   ªL
+  .runtime.writebarrierptr   æL
+  .runtime.writebarrierptr   ”M
+  .runtime.writebarrierptr   ĞM
+  .runtime.writebarrierptr   şM
+  .runtime.writebarrierptr   ºN
+  .runtime.writebarrierptr   èN
+  .runtime.writebarrierptr   ¤O
+  .runtime.writebarrierptr   ÒO
+  .runtime.writebarrierptr   ôO
+  0runtime.morestack_noctxt   @°  ²"".autotmp_0182  "type.interface {} "".autotmp_0181  "type.interface {} "".autotmp_0180 ÿ(type.[2]interface {} "".autotmp_0178  *type.*[2]interface {} "".autotmp_0177  &type.[]interface {} "".autotmp_0176  "type.interface {} "".autotmp_0175  "type.interface {} "".autotmp_0174 ¿(type.[2]interface {} "".autotmp_0172  *type.*[2]interface {} "".autotmp_0171  &type.[]interface {} "".autotmp_0170  "type.interface {} "".autotmp_0169  "type.interface {} "".autotmp_0168 ÿ(type.[2]interface {} "".autotmp_0166  *type.*[2]interface {} "".autotmp_0165  &type.[]interface {} "".autotmp_0164  "type.interface {} "".autotmp_0163  "type.interface {} "".autotmp_0162 ¿(type.[2]interface {} "".autotmp_0160  *type.*[2]interface {} "".autotmp_0159  &type.[]interface {} "".autotmp_0158  "type.interface {} "".autotmp_0157  "type.interface {} "".autotmp_0156 ÿ(type.[2]interface {} "".autotmp_0154  *type.*[2]interface {} "".autotmp_0153  &type.[]interface {} "".autotmp_0152  "type.interface {} "".autotmp_0151  "type.interface {} "".autotmp_0150 ¿(type.[2]interface {} "".autotmp_0148  *type.*[2]interface {} "".autotmp_0147  &type.[]interface {} "".autotmp_0146  "type.interface {} "".autotmp_0145  "type.interface {} "".autotmp_0144 (type.[2]interface {} "".autotmp_0142  *type.*[2]interface {} "".autotmp_0141  &type.[]interface {} "".autotmp_0140  "type.interface {} "".autotmp_0139  "type.interface {} "".autotmp_0138 ?(type.[2]interface {} "".autotmp_0136  *type.*[2]interface {} "".autotmp_0135  &type.[]interface {} "".autotmp_0134  "type.interface {} "".autotmp_0133  "type.interface {} "".autotmp_0132  *type.*[2]interface {} "".autotmp_0131  &type.[]interface {} "".autotmp_0130  "type.interface {} "".autotmp_0129 ß"type.interface {} "".autotmp_0127 ß&type.[]interface {} "".autotmp_0126  type.time.Time "".autotmp_0125  type.string "".autotmp_0124  >type.*github.com/jinzhu/gorm.DB "".autotmp_0123  type.string "".autotmp_0122  type.string "".autotmp_0121  >type.*github.com/jinzhu/gorm.DB "".autotmp_0120  4type.*"".UserFriendRequest "".autotmp_0119  type.time.Time "".autotmp_0118  type.string "".autotmp_0117  >type.*github.com/jinzhu/gorm.DB "".autotmp_0116  type.string "".autotmp_0115  type.string "".autotmp_0114  >type.*github.com/jinzhu/gorm.DB "".autotmp_0113  4type.*"".UserFriendRequest "".autotmp_0112  type.time.Time "".autotmp_0111  type.string "".autotmp_0110  >type.*github.com/jinzhu/gorm.DB "".autotmp_0109  type.string "".autotmp_0108  type.string "".autotmp_0107  >type.*github.com/jinzhu/gorm.DB "".autotmp_0106  4type.*"".UserFriendRequest "".autotmp_0105 ¯type.time.Time "".autotmp_0104 ¿type.string "".autotmp_0103 Ÿ>type.*github.com/jinzhu/gorm.DB "".autotmp_0102 Ÿtype.string "".autotmp_0101  type.string "".autotmp_0100  >type.*github.com/jinzhu/gorm.DB "".autotmp_0099  4type.*"".UserFriendRequest "".autotmp_0098  4type.*"".UserFriendRequest "".autotmp_0097  >type.*github.com/jinzhu/gorm.DB "".autotmp_0096  type.int "".autotmp_0095  type.int "".autotmp_0094  type.string "".autotmp_0092 >type.*github.com/jinzhu/gorm.DB "".autotmp_0091 ¿type.int "".autotmp_0090 ¯type.int "".autotmp_0089 ÿtype.string *"".&friendUserRequest ï4type.*"".UserFriendRequest *"".&userFriendRequest ÿ4type.*"".UserFriendRequest "".status  type.string "".friendId type.int "".userId  type.int "°¢¯°Ë ( l€"%%ÒÚK¯«gjGC¯«	jj	55 Ú -%ZRüÖü|F¿¿'›¿0¼¼*»255T‰¹¿*¿0¿¿'›»55555t TgclocalsÂ·374f806628914d6974a8da3da70d1151 TgclocalsÂ·1c0e2287fc95bc5a3e76d24bc796b6fb   °/Users/mitesh/Personal/bitbucket/go-web/src/model/userfriendrequest/userfriendrequest.goş"".Read  à  ÖeH‹%    HD$ÀH;A†‰  HìÀ   1ÛH‰œ$Ğ   H‰œ$Ø   H‰œ$à   H    H‰$è    H‹\$H‰\$PH    H‰œ$˜   HÇ„$       H‹œ$È   H‰\$@H    H‰œ$ˆ   HÇ„$      H    H‰$è    H‹\$Hƒû „å  HÇ„$°      HÇ„$¸      H‰œ$¨   H    H‰$H\$@H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   H‰L$XH‰H‰D$`€=     …_  H‰CH    H‰$Hœ$ˆ   H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   HƒÃH‰L$XH‰H‰D$`€=     …î  H‰CH    H‰$Hœ$˜   H‰\$HÇD$    è    H\$H|$H‹H‰H‹KH‰OH‹    H‰$H‹œ$¨   H‰\$H‹œ$°   H‰\$ H‹œ$¸   H‰\$(è    H‹\$0H‰\$HH    H‰\$xHÇ„$€      H‹œ$È   H‰\$8H    H‰\$hHÇD$p   H    H‰$è    H‹\$Hƒû „  HÇ„$°      HÇ„$¸      H‰œ$¨   H    H‰$H\$8H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   H‰L$XH‰H‰D$`€=     ……  H‰CH    H‰$H\$hH‰\$HÇD$    è    H‹L$H‹D$ H‹œ$¨   HƒÃH‰L$XH‰H‰D$`€=     …  H‰CH    H‰$H\$xH‰\$HÇD$    è    H\$H|$H‹H‰H‹KH‰OH‹\$HH‰$H‹œ$¨   H‰\$H‹œ$°   H‰\$ H‹œ$¸   H‰\$(è    H‹\$0H‰$H    H‰\$HÇD$   1ÛH‰\$H‰\$ H‰\$(è    H‹L$0H‹D$PH‰$H    H‰\$XH‰\$H‰D$`H‰D$1ÛH‰\$H‰\$ H‰\$(è    H‹\$PH‹+H‰¬$Ğ   H‹kH‰¬$Ø   H‹kH‰¬$à   HÄÀ   ÃLCL‰$H‰D$è    éÖşÿÿLCL‰$H‰D$è    éhşÿÿ‰éîıÿÿLCL‰$H‰D$è    éÿüÿÿLCL‰$H‰D$è    éüÿÿ‰éüÿÿè    éUûÿÿN
+      x  6type.[]"".UserFriendRequest   Š
+  "runtime.newobject   ¬  Lgo.string."user_id = ? and status = ?"   ü   go.string."SENT"   ²  (type.[2]interface {}   Ä
+  "runtime.newobject   °  type.int   è
+  runtime.convT2E   ² 6runtime.writeBarrierEnabled   Ö  type.string   ”
+  runtime.convT2E   æ 6runtime.writeBarrierEnabled   Š  type.string   È
+  runtime.convT2E   †  model.Db   æ
+  Dgithub.com/jinzhu/gorm.(*DB).Where   ˆ  Lgo.string."user_id = ? and status = ?"   Ò  &go.string."PENDING"   ü  (type.[2]interface {}   	
+  "runtime.newobject   ú	  type.int   ²
+
+  runtime.convT2E   ü
+ 6runtime.writeBarrierEnabled      type.string   Ø
+  runtime.convT2E   ª 6runtime.writeBarrierEnabled   Î  type.string   †
+  runtime.convT2E    
+  >github.com/jinzhu/gorm.(*DB).Or   À  6go.string."updated_at desc"   ˆ
+  Dgithub.com/jinzhu/gorm.(*DB).Order   ²  8type.*[]"".UserFriendRequest   †
+  Bgithub.com/jinzhu/gorm.(*DB).Find   Š
+  .runtime.writebarrierptr   ¸
+  .runtime.writebarrierptr   ô
+  .runtime.writebarrierptr   ¢
+  .runtime.writebarrierptr   Ä
+  0runtime.morestack_noctxt   @€  """.autotmp_0212  "type.interface {} "".autotmp_0211  "type.interface {} "".autotmp_0210  *type.*[2]interface {} "".autotmp_0209  &type.[]interface {} "".autotmp_0208  "type.interface {} "".autotmp_0207 Ï"type.interface {} "".autotmp_0205 /&type.[]interface {} "".autotmp_0201 ¯type.string "".autotmp_0200 type.int "".autotmp_0199 type.string "".autotmp_0198 ï>type.*github.com/jinzhu/gorm.DB "".autotmp_0197 otype.string "".autotmp_0196 ÿtype.int "".autotmp_0195 Otype.string ,"".&userFriendRequests ß8type.*[]"".UserFriendRequest "".~r1 6type.[]"".UserFriendRequest "".userId  type.int €—ÿ€y °	 ¤9´0j 0 D]RÿTR÷µ57 TgclocalsÂ·45fc912e908bd82a3e80d7be34d17d5d TgclocalsÂ·85eb7afbf4cb8c8578bda6b97e3ded49   °/Users/mitesh/Personal/bitbucket/go-web/src/model/userfriendrequest/userfriendrequest.goş"".init  À  ²eH‹%    H;avC¶    €û t¶    €ûuÃè    Æ    è    è    è    è    Æ    Ãè    ë§
+      $  "".initdoneÂ·   <  "".initdoneÂ·   R
+  "runtime.throwinit   b "".initdoneÂ·   n
+  model.init   x
+  time.init   ‚
+  model/user.init   Œ
+  *model/userfriend.init   ˜ "".initdoneÂ·   ¦
+  0runtime.morestack_noctxt        ` ` ¬` 
+ (8 TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   °/Users/mitesh/Personal/bitbucket/go-web/src/model/userfriendrequest/userfriendrequest.goş4type..hash.[2]interface {} à  ÊeH‹%    H;a†ˆ   Hƒì(H‹L$81ÀHÇD$   H‹l$H9è}\H‰D$ H‰ÅH‰ÈHÁÀH»¿c»kïR H¯ØH‰ØH‹\$0Hƒû t;HÁåHëH‰$H‰D$8H‰D$è    H‹L$H‹D$ HÿÀH‹l$H9è|¤H‰L$@HƒÄ(Ã‰ëÁè    é[ÿÿÿ
+      ä
+  (runtime.nilinterhash   ¸
+  0runtime.morestack_noctxt   0P  
+"".autotmp_0216 type.int "".autotmp_0215 type.int "".~r2  type.uintptr "".h type.uintptr "".p  *type.*[2]interface {} POP ° ° 
+ q? TgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2 TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   °/Users/mitesh/Personal/bitbucket/go-web/src/model/userfriendrequest/userfriendrequest.goş0type..eq.[2]interface {} à  ÖeH‹%    H;a†Î   HƒìX1ÀHÇD$(   H‹l$(H9è’   H‰D$0H‹\$hHƒû „–   H‰ÅHÁåHëH‹H‹sH‹\$`Hƒû tvH‰ÅHÁåHëH‹H‹SH9ÈuVH‰D$8H‰$H‰T$@H‰T$H‰L$HH‰L$H‰t$PH‰t$è    ¶\$ €û t H‹D$0HÿÀH‹l$(H9èŒnÿÿÿÆD$pHƒÄXÃÆD$p HƒÄXÃ‰ë†‰écÿÿÿè    éÿÿÿ
+      ¼
+  runtime.efaceeq   Ä
+  0runtime.morestack_noctxt   0°  "".autotmp_0220 ?"type.interface {} "".autotmp_0219 "type.interface {} "".autotmp_0218 _type.int "".autotmp_0217 Otype.int "".~r2  type.bool "".q *type.*[2]interface {} "".p  *type.*[2]interface {} &°´¯°	¯° ğ ğ  S TgclocalsÂ·3bb21ca8fe1d99a3e492463bd711418a TgclocalsÂ·a8eabfc4a4514ed6b3b0c61e9680e440   °/Users/mitesh/Personal/bitbucket/go-web/src/model/userfriendrequest/userfriendrequest.goş>type..hash."".UserFriendRequest    ŠeH‹%    H;a†è   Hƒì H‹\$(H‰$Hƒ<$ „Ä   H‹\$0H‰\$HÇD$   è    H‹D$H‹\$(H‰$Hƒ<$ „‡   Hƒ$H‰D$0H‰D$è    H‹D$H‹\$(H‰$Hƒ<$ tUHƒ$(H‰D$0H‰D$è    H‹D$H‹\$(H‰$Hƒ<$ t#Hƒ$@H‰D$0H‰D$è    H‹\$H‰\$8HƒÄ Ã‰%    ëÔ‰%    ë¢‰%    émÿÿÿ‰%    é0ÿÿÿè    éûşÿÿ
+      ~
+  runtime.memhash   Ø
+  runtime.strhash   ª
+  (type..hash.time.Time   ü
+  (type..hash.time.Time   ø
+  0runtime.morestack_noctxt   0@  "".~r2  type.uintptr "".h type.uintptr "".p  4type.*"".UserFriendRequest @¹?@?    >Ò TgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2 TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   °/Users/mitesh/Personal/bitbucket/go-web/src/model/userfriendrequest/userfriendrequest.goş:type..eq."".UserFriendRequest €  âeH‹%    H;a†”  HƒìHH‹\$PH‰$Hƒ<$ „p  H‹\$XH‰\$Hƒ|$ „N  HÇD$   è    ¶\$€û u
+ÆD$` HƒÄHÃH‹\$PHƒû „  H‹sH‹K H‹\$XHƒû „ø   H‹SH‹C H9Á…İ   H‰t$8H‰4$H‰L$@H‰L$H‰T$(H‰T$H‰D$0H‰D$è    H‹t$PH‹T$X¶\$ €û „™   H‰ñHƒş „…   HƒÁ(H‰ĞHƒú ttHƒÀ(H‹H‹(H9ëu[‹Y‹h9ëuQH‹YH‹hH9ëuDH‰ğHƒÀ@H‰ÑHƒÁ@H‹H‹)H9ëu!‹X‹i9ëuH‹XH‹iH9ëu
+ÆD$`HƒÄHÃÆD$` HƒÄHÃÆD$` HƒÄHÃ‰ëˆ‰étÿÿÿÆD$` HƒÄHÃ‰éÿÿÿ‰éãşÿÿ‰%    é¦şÿÿ‰%    é„şÿÿè    éOşÿÿ
+      –
+   runtime.memequal   „
+   runtime.eqstring   Ğ
+  0runtime.morestack_noctxt   0  "".autotmp_0227  type.*time.Time "".autotmp_0226  type.*time.Time "".autotmp_0223 ?type.string "".autotmp_0222 type.string "".~r2  type.bool "".q 4type.*"".UserFriendRequest "".p  4type.*"".UserFriendRequest JKô		? À À  Jö TgclocalsÂ·3bb21ca8fe1d99a3e492463bd711418a TgclocalsÂ·a8eabfc4a4514ed6b3b0c61e9680e440   °/Users/mitesh/Personal/bitbucket/go-web/src/model/userfriendrequest/userfriendrequest.goş(go.string.hdr."SENT"                        go.string."SENT"   ş go.string."SENT"   
+SENT  şZgo.string.hdr."user_id = ? and friend_id = ?"                       Rgo.string."user_id = ? and friend_id = ?"   şRgo.string."user_id = ? and friend_id = ?" @  <user_id = ? and friend_id = ?  ş,go.string.hdr."status"                       $go.string."status"   ş$go.string."status"   status  ş4go.string.hdr."updated_at"             
+          ,go.string."updated_at"   ş,go.string."updated_at"    updated_at  ş.go.string.hdr."PENDING"                       &go.string."PENDING"   ş&go.string."PENDING"   PENDING  şTgclocalsÂ·f445c8d3f4cb607fb160317f601f85aa ğ  ğ   Q                  €         €        €       P €         €D"      €         €       T €        €        €       U€       €         €D"       €       Q ø         ø        ø       Uˆÿ        ˆÿ        şTgclocalsÂ·f245f7dbbe6cb5d54b812b361f791099 °  °      
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+    ş,go.string.hdr."REJECT"                       $go.string."REJECT"   ş$go.string."REJECT"   REJECT  ş,go.string.hdr."CANCEL"                       $go.string."CANCEL"   ş$go.string."CANCEL"   CANCEL  ş,go.string.hdr."ACCEPT"                       $go.string."ACCEPT"   ş$go.string."ACCEPT"   ACCEPT  şTgclocalsÂ·1c0e2287fc95bc5a3e76d24bc796b6fb à  à   2                                            
+   À    À I   À I  ü H  ü      ü A  Àÿ @  Àÿ B  Àÿ B üÿ @ üÿ J À   H À   I À   Iü   Hü      ü   Àÿ    Àÿ   BÀÿ   Bşÿ   @şÿ     üÿ    şTgclocalsÂ·374f806628914d6974a8da3da70d1151 ø  ø                                                                                              şTgo.string.hdr."user_id = ? and status = ?"                       Lgo.string."user_id = ? and status = ?"   şLgo.string."user_id = ? and status = ?" @  6user_id = ? and status = ?  ş>go.string.hdr."updated_at desc"                       6go.string."updated_at desc"   ş6go.string."updated_at desc"     updated_at desc  şTgclocalsÂ·85eb7afbf4cb8c8578bda6b97e3ded49 @  @              S  S  R   şTgclocalsÂ·45fc912e908bd82a3e80d7be34d17d5d @  @                               şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           ş0"".initdoneÂ·  type.uint8   ş"".CreateÂ·f              "".Create   ş"".UpdateÂ·f              "".Update   ş"".ReadÂ·f              "".Read   ş"".initÂ·f              "".init   ş"runtime.gcbits.03    ş8go.string.hdr."interface {}"                       0go.string."interface {}"   ş0go.string."interface {}"    interface {}  ş"type.interface {} À  À              çW                                                                          0€  runtime.algarray   @  "runtime.gcbits.03   P  8go.string.hdr."interface {}"   p  4go.weak.type.*interface {}   €  "runtime.zerovalue   À "type.interface {}   ş"runtime.gcbits.01    ş<go.string.hdr."[]interface {}"                       4go.string."[]interface {}"   ş4go.string."[]interface {}"    []interface {}  ş&type.[]interface {}                   p“ê/                                                         0   runtime.algarray   @  "runtime.gcbits.01   P  <go.string.hdr."[]interface {}"   p  8go.weak.type.*[]interface {}   €  "runtime.zerovalue     "type.interface {}   şRgo.typelink.[]interface {}	[]interface {}              &type.[]interface {}   şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2             şTgclocalsÂ·a8eabfc4a4514ed6b3b0c61e9680e440              şTgclocalsÂ·3bb21ca8fe1d99a3e492463bd711418a             ş<type..hashfunc.[2]interface {}              4type..hash.[2]interface {}   ş8type..eqfunc.[2]interface {}              0type..eq.[2]interface {}   ş2type..alg.[2]interface {}                        <type..hashfunc.[2]interface {}     8type..eqfunc.[2]interface {}   ş"runtime.gcbits.0f    ş>go.string.hdr."[2]interface {}"                       6go.string."[2]interface {}"   ş6go.string."[2]interface {}"     [2]interface {}  ş(type.[2]interface {} À  À                ,Y¤ñ                                                                        0  2type..alg.[2]interface {}   @  "runtime.gcbits.0f   P  >go.string.hdr."[2]interface {}"   p  :go.weak.type.*[2]interface {}   €  "runtime.zerovalue     "type.interface {}      &type.[]interface {}   şVgo.typelink.[2]interface {}	[2]interface {}              (type.[2]interface {}   şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2             şTgclocalsÂ·a8eabfc4a4514ed6b3b0c61e9680e440              şTgclocalsÂ·3bb21ca8fe1d99a3e492463bd711418a             şFtype..hashfunc."".UserFriendRequest              >type..hash."".UserFriendRequest   şBtype..eqfunc."".UserFriendRequest              :type..eq."".UserFriendRequest   ş<type..alg."".UserFriendRequest                        Ftype..hashfunc."".UserFriendRequest     Btype..eqfunc."".UserFriendRequest   ş&runtime.gcbits.8804   ˆ şfgo.string.hdr."userfriendrequest.UserFriendRequest"             #          ^go.string."userfriendrequest.UserFriendRequest"   ş^go.string."userfriendrequest.UserFriendRequest" P  Huserfriendrequest.UserFriendRequest  şFgo.string.hdr."UserFriendRequestId"                       >go.string."UserFriendRequestId"   ş>go.string."UserFriendRequestId" 0  (UserFriendRequestId  ş¢go.string.hdr."gorm:\"primary_key; auto_increment\" json:\"userFriendRequestId\""             =          šgo.string."gorm:\"primary_key; auto_increment\" json:\"userFriendRequestId\""   şšgo.string."gorm:\"primary_key; auto_increment\" json:\"userFriendRequestId\"" €  |gorm:"primary_key; auto_increment" json:"userFriendRequestId"  ş,go.string.hdr."UserId"                       $go.string."UserId"   ş$go.string."UserId"   UserId  ş`go.string.hdr."sql:\"not null\" json:\"userId\""                       Xgo.string."sql:\"not null\" json:\"userId\""   şXgo.string."sql:\"not null\" json:\"userId\"" @  :sql:"not null" json:"userId"  ş0go.string.hdr."FriendId"                       (go.string."FriendId"   ş(go.string."FriendId"    FriendId  şdgo.string.hdr."sql:\"not null\" json:\"friendId\""                       \go.string."sql:\"not null\" json:\"friendId\""   ş\go.string."sql:\"not null\" json:\"friendId\"" @  >sql:"not null" json:"friendId"  ş,go.string.hdr."Status"                       $go.string."Status"   ş$go.string."Status"   Status  ş`go.string.hdr."sql:\"not null\" json:\"status\""                       Xgo.string."sql:\"not null\" json:\"status\""   şXgo.string."sql:\"not null\" json:\"status\"" @  :sql:"not null" json:"status"  ş2go.string.hdr."CreatedAt"             	          *go.string."CreatedAt"   ş*go.string."CreatedAt"    CreatedAt  şDgo.string.hdr."json:\"createdAt\""                       <go.string."json:\"createdAt\""   ş<go.string."json:\"createdAt\"" 0  "json:"createdAt"  ş2go.string.hdr."UpdatedAt"             	          *go.string."UpdatedAt"   ş*go.string."UpdatedAt"    UpdatedAt  şDgo.string.hdr."json:\"updatedAt\""                       <go.string."json:\"updatedAt\""   ş<go.string."json:\"updatedAt\"" 0  "json:"updatedAt"  şBgo.string.hdr."UserFriendRequest"                       :go.string."UserFriendRequest"   ş:go.string."UserFriendRequest" 0  $UserFriendRequest  şNgo.string.hdr."model/userfriendrequest"                       Fgo.string."model/userfriendrequest"   şFgo.string."model/userfriendrequest" 0  0model/userfriendrequest  ş"go.importpath."".                       Fgo.string."model/userfriendrequest"   ş2type."".UserFriendRequest  ğ  ğX       X       «/´                                                                                                                                                                                                                                                                    (                                       @                                               80  <type..alg."".UserFriendRequest   @  &runtime.gcbits.8804   P  fgo.string.hdr."userfriendrequest.UserFriendRequest"   p  4type.*"".UserFriendRequest   €  "runtime.zerovalue   À 2type."".UserFriendRequest   À  Fgo.string.hdr."UserFriendRequestId"   à  type.int   ğ  ¢go.string.hdr."gorm:\"primary_key; auto_increment\" json:\"userFriendRequestId\""     ,go.string.hdr."UserId"   °  type.int   À  `go.string.hdr."sql:\"not null\" json:\"userId\""   à  0go.string.hdr."FriendId"   €  type.int     dgo.string.hdr."sql:\"not null\" json:\"friendId\""   °  ,go.string.hdr."Status"   Ğ  type.string   à  `go.string.hdr."sql:\"not null\" json:\"status\""   €  2go.string.hdr."CreatedAt"      type.time.Time   °  Dgo.string.hdr."json:\"createdAt\""   Ğ  2go.string.hdr."UpdatedAt"   ğ  type.time.Time   €  Dgo.string.hdr."json:\"updatedAt\""   `  2type."".UserFriendRequest      Bgo.string.hdr."UserFriendRequest"   °  "go.importpath."".   Àğ 2type."".UserFriendRequest   şhgo.string.hdr."*userfriendrequest.UserFriendRequest"             $          `go.string."*userfriendrequest.UserFriendRequest"   ş`go.string."*userfriendrequest.UserFriendRequest" P  J*userfriendrequest.UserFriendRequest  ş4type.*"".UserFriendRequest                    z"{6 6                                                        0   runtime.algarray   @  "runtime.gcbits.01   P  hgo.string.hdr."*userfriendrequest.UserFriendRequest"   p  Fgo.weak.type.**"".UserFriendRequest   €  "runtime.zerovalue     2type."".UserFriendRequest   ş@go.string.hdr."*[2]interface {}"                       8go.string."*[2]interface {}"   ş8go.string."*[2]interface {}" 0  "*[2]interface {}  ş*type.*[2]interface {}                   ¾s-q 6                                                        0   runtime.algarray   @  "runtime.gcbits.01   P  @go.string.hdr."*[2]interface {}"   p  <go.weak.type.**[2]interface {}   €  "runtime.zerovalue     (type.[2]interface {}   şjgo.string.hdr."[]userfriendrequest.UserFriendRequest"             %          bgo.string."[]userfriendrequest.UserFriendRequest"   şbgo.string."[]userfriendrequest.UserFriendRequest" P  L[]userfriendrequest.UserFriendRequest  ş6type.[]"".UserFriendRequest                   {/SÔ                                                         0   runtime.algarray   @  "runtime.gcbits.01   P  jgo.string.hdr."[]userfriendrequest.UserFriendRequest"   p  Hgo.weak.type.*[]"".UserFriendRequest   €  "runtime.zerovalue     2type."".UserFriendRequest   şgo.typelink.[]userfriendrequest.UserFriendRequest	[]"".UserFriendRequest              6type.[]"".UserFriendRequest   şlgo.string.hdr."*[]userfriendrequest.UserFriendRequest"             &          dgo.string."*[]userfriendrequest.UserFriendRequest"   şdgo.string."*[]userfriendrequest.UserFriendRequest" P  N*[]userfriendrequest.UserFriendRequest  ş8type.*[]"".UserFriendRequest                   ¬Ó 6                                                        0   runtime.algarray   @  "runtime.gcbits.01   P  lgo.string.hdr."*[]userfriendrequest.UserFriendRequest"   p  Jgo.weak.type.**[]"".UserFriendRequest   €  "runtime.zerovalue     6type.[]"".UserFriendRequest   ş.go.string.hdr."runtime"                       &go.string."runtime"   ş&go.string."runtime"   runtime  ş,go.importpath.runtime.                       &go.string."runtime"   ş*go.string.hdr."model"                       "go.string."model"   ş"go.string."model"   model  ş(go.importpath.model.                       "go.string."model"   ş(go.string.hdr."time"                        go.string."time"   ş go.string."time"   
+time  ş&go.importpath.time.                        go.string."time"   ş4go.string.hdr."model/user"             
+          ,go.string."model/user"   ş,go.string."model/user"    model/user  ş2go.importpath.model/user.             
+          ,go.string."model/user"   ş@go.string.hdr."model/userfriend"                       8go.string."model/userfriend"   ş8go.string."model/userfriend" 0  "model/userfriend  ş>go.importpath.model/userfriend.                       8go.string."model/userfriend"   ş:type..hash.[2]interface {}Â·f              4type..hash.[2]interface {}   ş6type..eq.[2]interface {}Â·f              0type..eq.[2]interface {}   şDtype..hash."".UserFriendRequestÂ·f              >type..hash."".UserFriendRequest   ş@type..eq."".UserFriendRequestÂ·f              :type..eq."".UserFriendRequest   ş"runtime.zerovalue      ÿÿgo13ld 
