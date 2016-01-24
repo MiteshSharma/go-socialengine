@@ -12,6 +12,7 @@ type ObjectLike struct {
 	UserId    		 int    `sql:"not null" 				   json:"userId"`
 	IsDeleted   	 int 	`sql:"DEFAULT:0"`
 	CreatedAt   	 time.Time								   `json:"createdAt"`
+	UpdatedAt  	 	 time.Time									`json:"updatedAt"`
 }
 
 func Create(userId, objectId int, objectType string) ObjectLike {
@@ -24,6 +25,7 @@ func Create(userId, objectId int, objectType string) ObjectLike {
 			ObjectType: objectType,
 			UserId:    	userId,
 			CreatedAt:  time.Now(),
+			UpdatedAt:  time.Now(),
 		}
 
 		model.Db.Create(&objectLike)
@@ -33,6 +35,7 @@ func Create(userId, objectId int, objectType string) ObjectLike {
 		objectLike.UserId = userId
 		objectLike.IsDeleted = 0
 		objectLike.CreatedAt = time.Now()
+		objectLike.UpdatedAt = time.Now()
 		model.Db.Save(&objectLike)
 	}
 	return objectLike
@@ -59,13 +62,17 @@ func Read(userId int) []ObjectLike {
 func Delete(userId, objectId int, objectType string) {
 	objectLike := ObjectLike{}
 	model.Db.Where("object_id = ? and object_type = ? and user_id = ?", objectId, objectType, userId).Find(&objectLike)
-	objectLike.IsDeleted = 1
-	model.Db.Save(&objectLike)
+	if objectLike != (ObjectLike{}) {
+		objectLike.IsDeleted = 1
+		objectLike.UpdatedAt = time.Now()
+		model.Db.Save(&objectLike)
+	}
 }
 
 func DeleteById(objectLikeId int) {
 	objectLike := ObjectLike{}
 	model.Db.First(&objectLike, objectLikeId)
 	objectLike.IsDeleted = 1
+	objectLike.UpdatedAt = time.Now()
 	model.Db.Save(&objectLike)
 }

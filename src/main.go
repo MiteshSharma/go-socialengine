@@ -26,6 +26,7 @@ func main() {
 	logger.Get().Debug("Port is : " + port)
 	n := negroni.Classic()
 	n.Use(middleware.NewResponse())
+	n.Use(middleware.NewUserAuth())
 	n.UseHandler(r)
 	n.Run(port)
 }

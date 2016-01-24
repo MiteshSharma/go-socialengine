@@ -3,6 +3,7 @@ package router
 import (
 	"github.com/julienschmidt/httprouter"
     "controller"
+	"controller/user"
     "controller/objectdetail"
     "controller/objectlike"
     "controller/objectcomment"
@@ -13,16 +14,19 @@ func RouteHandler() *httprouter.Router {
 
 	m.GET("/", controller.MainHandler)
 
+	// User
+	m.POST("/user/create", user.Create)
 	// Object details
 	m.GET("/objectdetail/read", objectdetail.Read)
 	// Object like calls
-	m.GET("/objectlike/create", objectlike.Create)
+	m.POST("/objectlike/create", objectlike.Create)
 	m.GET("/objectlike/read", objectlike.Read)
-	m.GET("/objectlike/delete", objectlike.Delete)
+	m.DELETE("/objectlike/delete", objectlike.Delete)
 	// Object comment calls
-	m.GET("/objectcomment/create", objectcomment.Create)
+	m.POST("/objectcomment/create", objectcomment.Create)
+	m.PUT("/objectcomment/update", objectcomment.Update)
 	m.GET("/objectcomment/read", objectcomment.Read)
-	m.GET("/objectcomment/delete", objectcomment.Delete)
+	m.DELETE("/objectcomment/delete", objectcomment.Delete)
 	
 	return m
 }

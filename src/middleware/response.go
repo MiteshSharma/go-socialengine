@@ -22,7 +22,7 @@ func (ua *Response) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http
 	Output = OutputObject{}
 	Output.Response = "{}"
 	Output.OutputType = "application/json"
-	Output.ResponseCode = http.StatusBadRequest
+	Output.ResponseCode = http.StatusOK
 	next(rw, r)
 	rw.Header().Set("Content-Type", Output.OutputType)
   	rw.Write([]byte(Output.Response))

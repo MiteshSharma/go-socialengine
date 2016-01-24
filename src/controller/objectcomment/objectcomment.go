@@ -7,18 +7,19 @@ import (
 	"strconv"
 	"helper"
 	"middleware"
+	"github.com/gorilla/context"
+	"strings"
 )
 
 func Create(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	objectIdStr := ps.ByName("object_id")
-	objectType := ps.ByName("object_type")
-	parentCommentIdStr := ps.ByName("parent_comment_id")
-	comment := ps.ByName("comment")
-	userIdStr := ps.ByName("user_id")
+	objectIdStr := r.FormValue("object_id")
+	objectType := r.FormValue("object_type")
+	parentCommentIdStr := r.FormValue("parent_comment_id")
+	comment := r.FormValue("comment")
+	userId := context.Get(r, "user_id").(int)
 
-	if helper.IsValidRequest(objectIdStr, objectType, userIdStr) {
+	if helper.IsValidRequest(objectIdStr, objectType) {
 		objectId, _ := strconv.Atoi(objectIdStr)
-		userId, _ := strconv.Atoi(userIdStr)
 		parentCommentId, _ := strconv.Atoi(parentCommentIdStr)
 
 		objectComment := objectcomment.Create(userId, objectId, parentCommentId, comment, objectType)
@@ -31,37 +32,44 @@ func Create(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	}
 }
 
+func Update(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	commentIdStr := r.FormValue("comment_id")
+	comment := r.FormValue("comment")
+
+	if helper.IsValidRequest(commentIdStr) {
+		commentId, _ := strconv.Atoi(commentIdStr)
+		objectComment := objectcomment.Update(commentId, comment)
+		responseJson, responseCode := helper.GetResponseJson(objectComment)
+		middleware.Output.Response = responseJson
+		middleware.Output.ResponseCode = responseCode
+	} else {
+		middleware.Output.ResponseCode = http.StatusBadRequest
+	}
+}
+
 func Read(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	requestType := ps.ByName("request_type")
-	objectLikeIdStr := ps.ByName("object_like_id")
-	objectIdStr := ps.ByName("object_id")
-	objectType := ps.ByName("object_type")
-	userIdStr := ps.ByName("user_id")
+	requestType := r.FormValue("request_type")
+	objectLikeIdStr := r.FormValue("object_like_id")
+	objectIdStr := r.FormValue("object_id")
+	objectType := r.FormValue("object_type")
+	userId := context.Get(r, "user_id").(int)
 
 	var objectLikes []objectcomment.ObjectComment
 
-	switch requestType {
-	case "user":
-		if helper.IsValidRequest(userIdStr) {
-			userId, _ := strconv.Atoi(userIdStr)
-			objectLikes = objectcomment.Read(userId)
-		}
-		break
-	case "object":
+	if strings.EqualFold(requestType, "user") {
+		objectLikes = objectcomment.Read(userId)
+	} else if strings.EqualFold(requestType, "object") {
 		if helper.IsValidRequest(objectIdStr) {
 			objectId, _ := strconv.Atoi(objectIdStr)
 			objectLikes = objectcomment.ReadByObject(objectId, objectType)
 		}
-		break
-	case "id":
+	} else if strings.EqualFold(requestType, "id") {
 		if helper.IsValidRequest(objectLikeIdStr) {
 			objectLikeId, _ := strconv.Atoi(objectIdStr)
 			objectLikes = objectcomment.ReadById(objectLikeId)
 		}
-		break
-	default:
+	} else {
 		objectLikes = nil
-		break
 	}
 	if objectLikes != nil {
 		responseJson, responseCode := helper.GetResponseJson(objectLikes)
@@ -73,27 +81,21 @@ func Read(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func Delete(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	requestType := ps.ByName("request_type")
-	objectLikeIdStr := ps.ByName("object_like_id")
-	objectIdStr := ps.ByName("object_id")
-	objectType := ps.ByName("object_type")
-	userIdStr := ps.ByName("user_id")
+	requestType := r.FormValue("request_type")
+	objectLikeIdStr := r.FormValue("object_like_id")
+	objectIdStr := r.FormValue("object_id")
+	objectType := r.FormValue("object_type")
+	userId := context.Get(r, "user_id").(int)
 
-	switch requestType {
-	case "object":
+	if strings.EqualFold(requestType, "object") {
 		if helper.IsValidRequest(objectIdStr) {
-			objectLikeId, _ := strconv.Atoi(objectLikeIdStr)
-			userId, _ := strconv.Atoi(userIdStr)
-			objectcomment.Delete(userId, objectLikeId, objectType)
+			objectId, _ := strconv.Atoi(objectIdStr)
+			objectcomment.Delete(userId, objectId, objectType)
 		}
-		break
-	case "id":
+	} else if strings.EqualFold(requestType, "id") {
 		if helper.IsValidRequest(objectLikeIdStr) {
-			objectLikeId, _ := strconv.Atoi(objectIdStr)
+			objectLikeId, _ := strconv.Atoi(objectLikeIdStr)
 			objectcomment.DeleteById(objectLikeId)
 		}
-		break
-	default:
-		break
 	}
 }

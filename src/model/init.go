@@ -11,7 +11,7 @@ var (
 )
 
 func Init() {
-	var str = config.Db_user + ":" + config.Db_password + "@/wedm?charset=utf8&parseTime=True&loc=Local"
+	var str = config.Db_user + ":" + config.Db_password + "@/"+config.Db_name+"?charset=utf8&parseTime=True&loc=Local"
 	dbm, err := gorm.Open("mysql", str)
 	if err != nil {
 		panic("Unable to connect to the database : ")

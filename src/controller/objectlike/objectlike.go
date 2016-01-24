@@ -7,16 +7,17 @@ import (
 	"model/objectlike"
 	"helper"
 	"middleware"
+	"github.com/gorilla/context"
+	"strings"
 )
 
 func Create(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	objectIdStr := ps.ByName("object_id")
-	objectType := ps.ByName("object_type")
-	userIdStr := ps.ByName("user_id")
+	objectIdStr := r.FormValue("object_id")
+	objectType := r.FormValue("object_type")
+	userId := context.Get(r, "user_id").(int)
 
-	if helper.IsValidRequest(objectIdStr, objectType, userIdStr) {
+	if helper.IsValidRequest(objectIdStr, objectType) {
 		objectId, _ := strconv.Atoi(objectIdStr)
-		userId, _ := strconv.Atoi(userIdStr)
 
 		objectLike := objectlike.Create(userId, objectId, objectType)
 
@@ -29,36 +30,26 @@ func Create(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func Read(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	requestType := ps.ByName("request_type")
-	objectLikeIdStr := ps.ByName("object_like_id")
-	objectIdStr := ps.ByName("object_id")
-	objectType := ps.ByName("object_type")
-	userIdStr := ps.ByName("user_id")
+	requestType := r.FormValue("request_type")
+	objectLikeIdStr := r.FormValue("object_like_id")
+	objectIdStr := r.FormValue("object_id")
+	objectType := r.FormValue("object_type")
+	userId := context.Get(r, "user_id").(int)
 
 	var objectLikes []objectlike.ObjectLike
 
-	switch requestType {
-		case "user":
-			if helper.IsValidRequest(userIdStr) {
-				userId, _ := strconv.Atoi(userIdStr)
-				objectLikes = objectlike.Read(userId)
-			}
-			break
-		case "object":
-			if helper.IsValidRequest(objectIdStr) {
-				objectId, _ := strconv.Atoi(objectIdStr)
-				objectLikes = objectlike.ReadByObject(objectId, objectType)
-			}
-			break
-		case "id":
-			if helper.IsValidRequest(objectLikeIdStr) {
-				objectLikeId, _ := strconv.Atoi(objectIdStr)
-				objectLikes = objectlike.ReadById(objectLikeId)
-			}
-			break
-		default:
-			objectLikes = nil
-			break
+	if strings.EqualFold(requestType, "user") {
+		objectLikes = objectlike.Read(userId)
+	} else if strings.EqualFold(requestType, "object") {
+		if helper.IsValidRequest(objectIdStr) {
+			objectId, _ := strconv.Atoi(objectIdStr)
+			objectLikes = objectlike.ReadByObject(objectId, objectType)
+		}
+	} else if strings.EqualFold(requestType, "id") {
+		if helper.IsValidRequest(objectLikeIdStr) {
+			objectLikeId, _ := strconv.Atoi(objectLikeIdStr)
+			objectLikes = objectlike.ReadById(objectLikeId)
+		}
 	}
 	if objectLikes != nil {
 		responseJson, responseCode := helper.GetResponseJson(objectLikes)
@@ -70,27 +61,21 @@ func Read(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func Delete(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	requestType := ps.ByName("request_type")
-	objectLikeIdStr := ps.ByName("object_like_id")
-	objectIdStr := ps.ByName("object_id")
-	objectType := ps.ByName("object_type")
-	userIdStr := ps.ByName("user_id")
+	requestType := r.FormValue("request_type")
+	objectLikeIdStr := r.FormValue("object_like_id")
+	objectIdStr := r.FormValue("object_id")
+	objectType := r.FormValue("object_type")
+	userId := context.Get(r, "user_id").(int)
 
-	switch requestType {
-	case "object":
+	if strings.EqualFold(requestType, "object") {
 		if helper.IsValidRequest(objectIdStr) {
-			objectLikeId, _ := strconv.Atoi(objectLikeIdStr)
-			userId, _ := strconv.Atoi(userIdStr)
-			objectlike.Delete(userId, objectLikeId, objectType)
+			objectId, _ := strconv.Atoi(objectIdStr)
+			objectlike.Delete(userId, objectId, objectType)
 		}
-		break
-	case "id":
+	} else if strings.EqualFold(requestType, "id") {
 		if helper.IsValidRequest(objectLikeIdStr) {
-			objectLikeId, _ := strconv.Atoi(objectIdStr)
+			objectLikeId, _ := strconv.Atoi(objectLikeIdStr)
 			objectlike.DeleteById(objectLikeId)
 		}
-		break
-	default:
-		break
 	}
 }
