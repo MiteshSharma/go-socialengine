@@ -10,9 +10,9 @@ import (
 )
 
 func Create(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	objectIdStr, _ := ps.ByName("object_id")
-	objectType, _ := ps.ByName("object_type")
-	userIdStr,_ := ps.ByName("user_id")
+	objectIdStr := ps.ByName("object_id")
+	objectType := ps.ByName("object_type")
+	userIdStr := ps.ByName("user_id")
 
 	if helper.IsValidRequest(objectIdStr, objectType, userIdStr) {
 		objectId, _ := strconv.Atoi(objectIdStr)
@@ -29,11 +29,11 @@ func Create(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func Read(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	requestType, _ := ps.ByName("request_type")
-	objectLikeIdStr, _ := ps.ByName("object_like_id")
-	objectIdStr, _ := ps.ByName("object_id")
-	objectType, _ := ps.ByName("object_type")
-	userIdStr, _ := ps.ByName("user_id")
+	requestType := ps.ByName("request_type")
+	objectLikeIdStr := ps.ByName("object_like_id")
+	objectIdStr := ps.ByName("object_id")
+	objectType := ps.ByName("object_type")
+	userIdStr := ps.ByName("user_id")
 
 	var objectLikes []objectlike.ObjectLike
 
@@ -70,11 +70,11 @@ func Read(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func Delete(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	requestType, _ := ps.ByName("request_type")
-	objectLikeIdStr, _ := ps.ByName("object_like_id")
-	objectIdStr, _ := ps.ByName("object_id")
-	objectType, _ := ps.ByName("object_type")
-	userIdStr,_ := ps.ByName("user_id")
+	requestType := ps.ByName("request_type")
+	objectLikeIdStr := ps.ByName("object_like_id")
+	objectIdStr := ps.ByName("object_id")
+	objectType := ps.ByName("object_type")
+	userIdStr := ps.ByName("user_id")
 
 	switch requestType {
 	case "object":

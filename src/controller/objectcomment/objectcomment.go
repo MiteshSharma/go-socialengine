@@ -10,11 +10,11 @@ import (
 )
 
 func Create(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	objectIdStr, _ := ps.ByName("object_id")
-	objectType, _ := ps.ByName("object_type")
-	parentCommentIdStr, _ := ps.ByName("parent_comment_id")
-	comment, _ := ps.ByName("comment")
-	userIdStr,_ := ps.ByName("user_id")
+	objectIdStr := ps.ByName("object_id")
+	objectType := ps.ByName("object_type")
+	parentCommentIdStr := ps.ByName("parent_comment_id")
+	comment := ps.ByName("comment")
+	userIdStr := ps.ByName("user_id")
 
 	if helper.IsValidRequest(objectIdStr, objectType, userIdStr) {
 		objectId, _ := strconv.Atoi(objectIdStr)
@@ -32,11 +32,11 @@ func Create(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func Read(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	requestType, _ := ps.ByName("request_type")
-	objectLikeIdStr, _ := ps.ByName("object_like_id")
-	objectIdStr, _ := ps.ByName("object_id")
-	objectType, _ := ps.ByName("object_type")
-	userIdStr, _ := ps.ByName("user_id")
+	requestType := ps.ByName("request_type")
+	objectLikeIdStr := ps.ByName("object_like_id")
+	objectIdStr := ps.ByName("object_id")
+	objectType := ps.ByName("object_type")
+	userIdStr := ps.ByName("user_id")
 
 	var objectLikes []objectcomment.ObjectComment
 
@@ -73,11 +73,11 @@ func Read(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func Delete(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	requestType, _ := ps.ByName("request_type")
-	objectLikeIdStr, _ := ps.ByName("object_like_id")
-	objectIdStr, _ := ps.ByName("object_id")
-	objectType, _ := ps.ByName("object_type")
-	userIdStr,_ := ps.ByName("user_id")
+	requestType := ps.ByName("request_type")
+	objectLikeIdStr := ps.ByName("object_like_id")
+	objectIdStr := ps.ByName("object_id")
+	objectType := ps.ByName("object_type")
+	userIdStr := ps.ByName("user_id")
 
 	switch requestType {
 	case "object":

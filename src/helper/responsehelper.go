@@ -13,13 +13,13 @@ func GetResponseJson(object interface{}) (response string, responseCode int) {
 	return string(js[:]), http.StatusOK
 }
 
-func emptyJson() {
+func emptyJson() string {
 	return "{}"
 }
 
 func IsValidRequest(inputArgs ...string) bool {
-	for inputArg := range inputArgs {
-		if inputArg == nil {
+	for _,inputArg := range inputArgs {
+		if len(inputArg) == 0 {
 			return false
 		}
 	}

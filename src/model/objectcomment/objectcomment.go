@@ -10,7 +10,7 @@ type ObjectComment struct {
 	ObjectId         	int    `sql:"not null" 				   json:"objectId"`
 	ObjectType       	string `sql:"not null" 				   json:"objectType"`
 	UserId    		 	int    `sql:"not null" json:"userId"`
-	ParentId    		string `sql:"not null" json:"commentId"`
+	ParentId    		int     `sql:"not null" json:"commentId"`
 	Comment    		 	string `sql:"not null" json:"comment"`
 	IsDeleted   	 	int 	`sql:"DEFAULT:0"`
 	CreatedAt   	 	time.Time									`json:"createdAt"`

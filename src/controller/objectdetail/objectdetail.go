@@ -10,8 +10,8 @@ import (
 )
 
 func Read(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	objectIdStr, _ := ps.ByName("object_id")
-	objectType, _ := ps.ByName("object_type")
+	objectIdStr := ps.ByName("object_id")
+	objectType := ps.ByName("object_type")
 
 	if helper.IsValidRequest(objectIdStr, objectType) {
 		objectId, _ := strconv.Atoi(objectIdStr)
