@@ -4,7 +4,6 @@ import (
 	"config"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
-	"log"
 )
 
 var (
@@ -15,7 +14,6 @@ func Init() {
 	var str = config.Db_user + ":" + config.Db_password + "@/wedm?charset=utf8&parseTime=True&loc=Local"
 	dbm, err := gorm.Open("mysql", str)
 	if err != nil {
-		log.Fatal(err)
 		panic("Unable to connect to the database : ")
 	}
 

@@ -3,9 +3,9 @@ package router
 import (
 	"github.com/julienschmidt/httprouter"
     "controller"
-    "controller/userstatuses"
-    "controller/userstatuslikes"
-    "controller/userstatuscomments"
+    "controller/objectdetail"
+    "controller/objectlike"
+    "controller/objectcomment"
 )
 
 func RouteHandler() *httprouter.Router {
@@ -13,16 +13,16 @@ func RouteHandler() *httprouter.Router {
 
 	m.GET("/", controller.MainHandler)
 
-	// User status calls
-	m.GET("/userstatus/create", userstatuses.Create)
-	m.GET("/userstatus/update", userstatuses.Update)
-	m.GET("/userstatus/delete", userstatuses.Delete)
-	m.GET("/userstatus/read", userstatuses.Read)
-	m.GET("/userstatuslike/create", userstatuslikes.Create)
-	m.GET("/userstatuslike/delete", userstatuslikes.Delete)
-	m.GET("/userstatuscomment/create", userstatuscomments.Create)
-	m.GET("/userstatuscomment/update", userstatuscomments.Update)
-	m.GET("/userstatuscomment/delete", userstatuscomments.Delete)
+	// Object details
+	m.GET("/objectdetail/read", objectdetail.Read)
+	// Object like calls
+	m.GET("/objectlike/create", objectlike.Create)
+	m.GET("/objectlike/read", objectlike.Read)
+	m.GET("/objectlike/delete", objectlike.Delete)
+	// Object comment calls
+	m.GET("/objectcomment/create", objectcomment.Create)
+	m.GET("/objectcomment/read", objectcomment.Read)
+	m.GET("/objectcomment/delete", objectcomment.Delete)
 	
 	return m
 }
