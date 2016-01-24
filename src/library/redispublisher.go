@@ -1,12 +1,12 @@
 package library
 
-import(
+import (
 	"github.com/garyburd/redigo/redis"
 	"logger"
 )
 
 type RedisPublisher struct {
-	channel string
+	channel          string
 	redis_connection redis.Conn
 }
 
@@ -29,7 +29,7 @@ func (r *RedisPublisher) GetRedisConnection() redis.Conn {
 	if r.redis_connection == nil {
 		r.redis_connection = NewRedisConnectionPool().GetConnection()
 	}
-	return r.redis_connection;
+	return r.redis_connection
 }
 
 func (r *RedisPublisher) CloseConn() {
@@ -41,7 +41,7 @@ func (r *RedisPublisher) CloseConn() {
 
 func (r *RedisPublisher) PublishChannelMessage(channel string, message string) {
 	if r.redis_connection != nil {
-		_,err := r.redis_connection.Do("PUBLISH", channel, message)
+		_, err := r.redis_connection.Do("PUBLISH", channel, message)
 		if err != nil {
 			logger.Get().Debug("Error is : " + err.Error())
 		}
@@ -50,7 +50,7 @@ func (r *RedisPublisher) PublishChannelMessage(channel string, message string) {
 
 func (r *RedisPublisher) PublishMessage(message string) {
 	if r.redis_connection != nil {
-		_,err := r.redis_connection.Do("PUBLISH", r.channel, message)
+		_, err := r.redis_connection.Do("PUBLISH", r.channel, message)
 		if err != nil {
 			logger.Get().Debug("Error is : " + err.Error())
 		}

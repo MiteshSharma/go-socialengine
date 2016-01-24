@@ -2,11 +2,11 @@ package logger
 
 import (
 	"fmt"
-	"time"
-	"os"
 	"log"
-	"strconv"
+	"os"
 	"path"
+	"strconv"
+	"time"
 )
 
 const (
@@ -60,11 +60,11 @@ func (l *logger) write(msg string, lvl int) {
 	}
 }
 
-var logHandler *logger;
+var logHandler *logger
 
 func Get() *logger {
 	if logHandler == nil {
-		logHandler = new (logger)
+		logHandler = new(logger)
 	}
 	return logHandler
 }
@@ -75,7 +75,7 @@ func (l *logger) SetLogLevel(level int) {
 
 func (l *logger) writeLog(logMessage string) {
 	f := l.fileHandler(l.getFilePath())
-	
+
 	log.SetOutput(f)
 	log.Println(logMessage)
 	defer f.Close()
@@ -83,18 +83,18 @@ func (l *logger) writeLog(logMessage string) {
 
 func (l *logger) fileHandler(filePath string) *os.File {
 	if err := os.MkdirAll(path.Dir(filePath), 0777); err != nil {
-        fmt.Println("Unable to create directory for tagfile! - " + err.Error())
+		fmt.Println("Unable to create directory for tagfile! - " + err.Error())
 	}
-	
-	f, err := os.OpenFile(filePath, os.O_RDWR | os.O_CREATE | os.O_APPEND, 0777)
+
+	f, err := os.OpenFile(filePath, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0777)
 	if err != nil {
-	    fmt.Println("error opening file: %v", err)
+		fmt.Println("error opening file: %v", err)
 	}
-	
+
 	return f
 }
 
 func (l *logger) getFilePath() string {
-	filePath := "../log/"+strconv.Itoa(time.Now().Year()) +"/"+ time.Now().Month().String() +"/"+ strconv.Itoa(time.Now().Day())+ ".log"
+	filePath := "../log/" + strconv.Itoa(time.Now().Year()) + "/" + time.Now().Month().String() + "/" + strconv.Itoa(time.Now().Day()) + ".log"
 	return filePath
 }

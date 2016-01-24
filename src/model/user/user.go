@@ -6,15 +6,15 @@ import (
 )
 
 type User struct {
-	Email        string    `gorm:"primary_key;"`
-	UserId       int `sql:"not null;unique;auto_increment"`
-	CreatedAt   time.Time
+	Email     string `gorm:"primary_key;"`
+	UserId    int    `sql:"not null;unique;auto_increment"`
+	CreatedAt time.Time
 }
 
 func Create(email string) User {
 	user := User{
-		Email:       email,
-		CreatedAt:   time.Now(),
+		Email:     email,
+		CreatedAt: time.Now(),
 	}
 
 	model.Db.Create(&user)

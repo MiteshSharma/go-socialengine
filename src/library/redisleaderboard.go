@@ -1,6 +1,6 @@
 package library
 
-import(
+import (
 	"github.com/garyburd/redigo/redis"
 	"logger"
 )
@@ -8,7 +8,7 @@ import(
 type RedisLeaderboard struct {
 	redis_connection redis.Conn
 	leaderboard_name string
-	page_size int
+	page_size        int
 }
 
 var redisLeaderboard map[string]*RedisLeaderboard
@@ -24,7 +24,7 @@ func GetRedisLeaderBoardInstance(leaderboardName string) *RedisLeaderboard {
 	if redisLeaderboard[leaderboardName] == nil {
 		leaderboardInstance := newRedisLeaderboard()
 		redisLeaderboard[leaderboardName] = leaderboardInstance
-		redisLeaderboard[leaderboardName].leaderboard_name = prefixleaderboard+leaderboardName
+		redisLeaderboard[leaderboardName].leaderboard_name = prefixleaderboard + leaderboardName
 	}
 	return redisLeaderboard[leaderboardName]
 }
@@ -37,7 +37,7 @@ func (r *RedisLeaderboard) GetRedisConnection() redis.Conn {
 	if r.redis_connection == nil {
 		r.redis_connection = NewRedisConnectionPool().GetConnection()
 	}
-	return r.redis_connection;
+	return r.redis_connection
 }
 
 func (r *RedisLeaderboard) CloseConn() {
@@ -61,7 +61,7 @@ func (r *RedisLeaderboard) setPageSize(pageSize int) {
 
 func (r *RedisLeaderboard) AddMember(member string, score float64) {
 	if r.redis_connection != nil {
-		_,err := r.redis_connection.Do("ZADD", r.leaderboard_name, score, member)
+		_, err := r.redis_connection.Do("ZADD", r.leaderboard_name, score, member)
 		if err != nil {
 			logger.Get().Debug("Error is : " + err.Error())
 		}
@@ -70,7 +70,7 @@ func (r *RedisLeaderboard) AddMember(member string, score float64) {
 
 func (r *RedisLeaderboard) RemoveMember(member string) {
 	if r.redis_connection != nil {
-		_,err := r.redis_connection.Do("ZREM", r.leaderboard_name, member)
+		_, err := r.redis_connection.Do("ZREM", r.leaderboard_name, member)
 		if err != nil {
 			logger.Get().Debug("Error is : " + err.Error())
 		}
@@ -79,7 +79,7 @@ func (r *RedisLeaderboard) RemoveMember(member string) {
 
 func (r *RedisLeaderboard) TotalMembers() int {
 	if r.redis_connection != nil {
-		count,err := redis.Int(r.redis_connection.Do("ZCARD", r.leaderboard_name))
+		count, err := redis.Int(r.redis_connection.Do("ZCARD", r.leaderboard_name))
 		if err != nil {
 			logger.Get().Debug("Error is : " + err.Error())
 		}
@@ -90,7 +90,7 @@ func (r *RedisLeaderboard) TotalMembers() int {
 
 func (r *RedisLeaderboard) MemberRank(member string) int {
 	if r.redis_connection != nil {
-		count,err := redis.Int(r.redis_connection.Do("ZREVRANK", r.leaderboard_name, member))
+		count, err := redis.Int(r.redis_connection.Do("ZREVRANK", r.leaderboard_name, member))
 		if err != nil {
 			logger.Get().Debug("Error is : " + err.Error())
 		}
@@ -101,7 +101,7 @@ func (r *RedisLeaderboard) MemberRank(member string) int {
 
 func (r *RedisLeaderboard) MemberScore(member string) int {
 	if r.redis_connection != nil {
-		count,err := redis.Int(r.redis_connection.Do("ZSCORE", r.leaderboard_name, member))
+		count, err := redis.Int(r.redis_connection.Do("ZSCORE", r.leaderboard_name, member))
 		if err != nil {
 			logger.Get().Debug("Error is : " + err.Error())
 		}
@@ -115,12 +115,12 @@ func (r *RedisLeaderboard) GetLeaders(currentPage int) []string {
 		if currentPage < 1 {
 			currentPage = 1
 		}
-		startOffset := (currentPage-1)*r.page_size
+		startOffset := (currentPage - 1) * r.page_size
 		if startOffset < 0 {
 			startOffset = 0
 		}
-		endOffset := startOffset + r.page_size -1
-		leaderData,err := redis.Strings(r.redis_connection.Do("ZREVRANGE", r.leaderboard_name, startOffset, endOffset))
+		endOffset := startOffset + r.page_size - 1
+		leaderData, err := redis.Strings(r.redis_connection.Do("ZREVRANGE", r.leaderboard_name, startOffset, endOffset))
 		if err != nil {
 			logger.Get().Debug("Error is : " + err.Error())
 		}
