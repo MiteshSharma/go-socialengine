@@ -57,21 +57,29 @@ func Update(commentId int, comment string) ObjectComment {
 	return objectComment
 }
 
-func ReadById(objectLikeId int) []ObjectComment {
+func ReadById(objectCommentId int) []ObjectComment {
 	var objectComments []ObjectComment
-	model.Db.Where("id = ? and is_deleted = 0", objectLikeId).Find(&objectComments)
+	model.Db.Where("id = ? and is_deleted = 0", objectCommentId).Find(&objectComments)
 	return objectComments
 }
 
-func ReadByObject(objectId int, objectType string) []ObjectComment {
+func ReadByObject(objectId, pageId, pageSize int, objectType string) []ObjectComment {
 	var objectComments []ObjectComment
-	model.Db.Where("object_id = ? and object_type = ? and is_deleted = 0", objectId, objectType).Find(&objectComments)
+	if (pageId == 0 || pageSize == 0) {
+		model.Db.Where("object_id = ? and object_type = ? and is_deleted = 0", objectId, objectType).Find(&objectComments)
+	} else {
+		model.Db.Where("object_id = ? and object_type = ? and is_deleted = 0", objectId, objectType).Offset(pageSize*(pageId-1)).Limit(pageSize).Find(&objectComments)
+	}
 	return objectComments
 }
 
-func Read(userId int) []ObjectComment {
+func Read(userId, pageId, pageSize int) []ObjectComment {
 	var objectComments []ObjectComment
-	model.Db.Where("user_id = ?", userId).Find(&objectComments)
+	if (pageId == 0 || pageSize == 0) {
+		model.Db.Where("user_id = ?", userId).Find(&objectComments)
+	} else {
+		model.Db.Where("user_id = ?", userId).Offset(pageSize*(pageId-1)).Limit(pageSize).Find(&objectComments)
+	}
 	return objectComments
 }
 

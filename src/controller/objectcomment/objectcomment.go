@@ -52,21 +52,27 @@ func Read(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	objectLikeIdStr := r.FormValue("object_like_id")
 	objectIdStr := r.FormValue("object_id")
 	objectType := r.FormValue("object_type")
+	pageIdStr := r.FormValue("page_id")
+	pageSizeStr := r.FormValue("page_size")
 	userId := context.Get(r, "user_id").(int)
 
 	var objectLikes []objectcomment.ObjectComment
 
 	if strings.EqualFold(requestType, "user") {
-		objectLikes = objectcomment.Read(userId)
+		pageId, _ := strconv.Atoi(pageIdStr)
+		pageSize, _ := strconv.Atoi(pageSizeStr)
+		objectLikes = objectcomment.Read(userId, pageId, pageSize)
 	} else if strings.EqualFold(requestType, "object") {
 		if helper.IsValidRequest(objectIdStr) {
 			objectId, _ := strconv.Atoi(objectIdStr)
-			objectLikes = objectcomment.ReadByObject(objectId, objectType)
+			pageId, _ := strconv.Atoi(pageIdStr)
+			pageSize, _ := strconv.Atoi(pageSizeStr)
+			objectLikes = objectcomment.ReadByObject(objectId, pageId, pageSize, objectType)
 		}
 	} else if strings.EqualFold(requestType, "id") {
 		if helper.IsValidRequest(objectLikeIdStr) {
-			objectLikeId, _ := strconv.Atoi(objectIdStr)
-			objectLikes = objectcomment.ReadById(objectLikeId)
+			objectCommentId, _ := strconv.Atoi(objectLikeIdStr)
+			objectLikes = objectcomment.ReadById(objectCommentId)
 		}
 	} else {
 		objectLikes = nil
