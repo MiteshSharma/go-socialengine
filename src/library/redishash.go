@@ -1,14 +1,14 @@
 package library
 
-import(
+import (
 	"github.com/garyburd/redigo/redis"
 	"logger"
 )
 
 type RedisHash struct {
 	redis_connection redis.Conn
-	hash_name string
-	page_size int
+	hash_name        string
+	page_size        int
 }
 
 var redisHash map[string]*RedisHash
@@ -24,7 +24,7 @@ func GetRedisHashInstance(hashName string) *RedisHash {
 	if redisHash[hashName] == nil {
 		hashInstance := newRedisHash()
 		redisHash[hashName] = hashInstance
-		redisHash[hashName].hash_name = prefixhash+hashName
+		redisHash[hashName].hash_name = prefixhash + hashName
 	}
 	return redisHash[hashName]
 }
@@ -37,7 +37,7 @@ func (r *RedisHash) GetRedisConnection() redis.Conn {
 	if r.redis_connection == nil {
 		r.redis_connection = NewRedisConnectionPool().GetConnection()
 	}
-	return r.redis_connection;
+	return r.redis_connection
 }
 
 func (r *RedisHash) CloseConn() {
@@ -49,7 +49,7 @@ func (r *RedisHash) CloseConn() {
 
 func (r *RedisHash) AddHashValue(key string, value string) {
 	if r.redis_connection != nil {
-		_,err := r.redis_connection.Do("HSET", r.hash_name, key, value)
+		_, err := r.redis_connection.Do("HSET", r.hash_name, key, value)
 		if err != nil {
 			logger.Get().Debug("Error is : " + err.Error())
 		}
@@ -58,7 +58,7 @@ func (r *RedisHash) AddHashValue(key string, value string) {
 
 func (r *RedisHash) RemoveHashValue(key string) {
 	if r.redis_connection != nil {
-		_,err := r.redis_connection.Do("HDEL", r.hash_name, key)
+		_, err := r.redis_connection.Do("HDEL", r.hash_name, key)
 		if err != nil {
 			logger.Get().Debug("Error is : " + err.Error())
 		}
@@ -67,7 +67,7 @@ func (r *RedisHash) RemoveHashValue(key string) {
 
 func (r *RedisHash) TotalValue() int {
 	if r.redis_connection != nil {
-		count,err := redis.Int(r.redis_connection.Do("HGETALL", r.hash_name))
+		count, err := redis.Int(r.redis_connection.Do("HGETALL", r.hash_name))
 		if err != nil {
 			logger.Get().Debug("Error is : " + err.Error())
 		}
@@ -78,7 +78,7 @@ func (r *RedisHash) TotalValue() int {
 
 func (r *RedisHash) GetHashValue(key string) string {
 	if r.redis_connection != nil {
-		value,err := redis.String(r.redis_connection.Do("HGET", r.hash_name, key))
+		value, err := redis.String(r.redis_connection.Do("HGET", r.hash_name, key))
 		if err != nil {
 			logger.Get().Debug("Error is : " + err.Error())
 		}

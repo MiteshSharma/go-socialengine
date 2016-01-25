@@ -1,21 +1,21 @@
 package objectdetail
 
 import (
-	"time"
 	"model"
-	"model/objectlike"
 	"model/objectcomment"
+	"model/objectlike"
+	"time"
 )
 
 type ObjectDetail struct {
-	ObjectId         int    `gorm:"primary_key" json:"objectId"`
-	ObjectType       string `gorm:"primary_key" json:"objectType"`
-	LikesCount 		int		`sql:"DEFAULT:0" 	json:"likeCount"`
-	CommentCount    int 	`sql:"DEFAULT:0" 	json:"commentCount"`
-	CreatedAt   	time.Time					`json:"createdAt"`
-	UpdatedAt   	time.Time					`json:"updatedAt"`
-	objectLikes     []objectlike.ObjectLike   	`json:"objectLikes"` // One-To-Many relationship (has many)
-	objectComments  []objectcomment.ObjectComment `json:"objectComments"` // One-To-Many relationship (has many)
+	ObjectId       int                           `gorm:"primary_key" json:"objectId"`
+	ObjectType     string                        `gorm:"primary_key" json:"objectType"`
+	LikesCount     int                           `sql:"DEFAULT:0" 	json:"likeCount"`
+	CommentCount   int                           `sql:"DEFAULT:0" 	json:"commentCount"`
+	CreatedAt      time.Time                     `json:"createdAt"`
+	UpdatedAt      time.Time                     `json:"updatedAt"`
+	objectLikes    []objectlike.ObjectLike       `json:"objectLikes"`    // One-To-Many relationship (has many)
+	objectComments []objectcomment.ObjectComment `json:"objectComments"` // One-To-Many relationship (has many)
 }
 
 func Create(objectId int, objectType string) ObjectDetail {
@@ -33,7 +33,7 @@ func Create(objectId int, objectType string) ObjectDetail {
 func Update(objectId, likeCount, commentCount int, objectType string) ObjectDetail {
 	var objectDetail ObjectDetail
 
-	model.Db.Model(&objectDetail).Where("object_id = ? and object_type = ?", objectId, objectType);
+	model.Db.Model(&objectDetail).Where("object_id = ? and object_type = ?", objectId, objectType)
 	objectDetail.LikesCount += likeCount
 	objectDetail.CommentCount += commentCount
 	objectDetail.UpdatedAt = time.Now()
@@ -44,6 +44,6 @@ func Update(objectId, likeCount, commentCount int, objectType string) ObjectDeta
 func Read(objectId int, objectType string) ObjectDetail {
 	var objectDetail ObjectDetail
 
-	model.Db.Model(&objectDetail).Where("object_id = ? and object_type = ?", objectId, objectType);
+	model.Db.Model(&objectDetail).Where("object_id = ? and object_type = ?", objectId, objectType)
 	return objectDetail
 }

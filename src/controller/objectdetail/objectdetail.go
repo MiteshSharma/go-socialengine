@@ -2,11 +2,11 @@ package objectdetail
 
 import (
 	"github.com/julienschmidt/httprouter"
+	"helper"
+	"middleware"
 	"model/objectdetail"
 	"net/http"
 	"strconv"
-	"middleware"
-	"helper"
 )
 
 func Read(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {

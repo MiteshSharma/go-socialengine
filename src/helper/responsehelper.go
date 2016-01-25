@@ -18,7 +18,7 @@ func emptyJson() string {
 }
 
 func IsValidRequest(inputArgs ...string) bool {
-	for _,inputArg := range inputArgs {
+	for _, inputArg := range inputArgs {
 		if len(inputArg) == 0 {
 			return false
 		}

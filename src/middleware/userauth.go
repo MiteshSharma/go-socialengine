@@ -1,10 +1,11 @@
 package middleware
 
-import(
-	"net/http"
-	"model/user"
+import (
 	"github.com/gorilla/context"
+	"model/user"
+	"net/http"
 )
+
 type UserAuth struct {
 }
 

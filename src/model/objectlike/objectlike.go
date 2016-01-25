@@ -1,18 +1,18 @@
 package objectlike
 
 import (
-	"time"
 	"model"
+	"time"
 )
 
 type ObjectLike struct {
-	Id				 int	`gorm:"primary_key;auto_increment" json:"id"`
-	ObjectId         int    `sql:"not null" 				   json:"objectId"`
-	ObjectType       string `sql:"not null" 				   json:"objectType"`
-	UserId    		 int    `sql:"not null" 				   json:"userId"`
-	IsDeleted   	 int 	`sql:"DEFAULT:0"`
-	CreatedAt   	 time.Time								   `json:"createdAt"`
-	UpdatedAt  	 	 time.Time									`json:"updatedAt"`
+	Id         int       `gorm:"primary_key;auto_increment" json:"id"`
+	ObjectId   int       `sql:"not null" 				   json:"objectId"`
+	ObjectType string    `sql:"not null" 				   json:"objectType"`
+	UserId     int       `sql:"not null" 				   json:"userId"`
+	IsDeleted  int       `sql:"DEFAULT:0"`
+	CreatedAt  time.Time `json:"createdAt"`
+	UpdatedAt  time.Time `json:"updatedAt"`
 }
 
 func Create(userId, objectId int, objectType string) ObjectLike {
@@ -21,9 +21,9 @@ func Create(userId, objectId int, objectType string) ObjectLike {
 
 	if objectLike == (ObjectLike{}) {
 		objectLike = ObjectLike{
-			ObjectId: objectId,
+			ObjectId:   objectId,
 			ObjectType: objectType,
-			UserId:    	userId,
+			UserId:     userId,
 			CreatedAt:  time.Now(),
 			UpdatedAt:  time.Now(),
 		}

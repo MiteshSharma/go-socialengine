@@ -1,8 +1,9 @@
 package middleware
 
-import(
+import (
 	"net/http"
 )
+
 type Response struct {
 }
 
@@ -11,8 +12,8 @@ func NewResponse() *Response {
 }
 
 type OutputObject struct {
-	Response string
-	OutputType string
+	Response     string
+	OutputType   string
 	ResponseCode int
 }
 
@@ -25,6 +26,6 @@ func (ua *Response) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http
 	Output.ResponseCode = http.StatusOK
 	next(rw, r)
 	rw.Header().Set("Content-Type", Output.OutputType)
-  	rw.Write([]byte(Output.Response))
+	rw.Write([]byte(Output.Response))
 	rw.WriteHeader(Output.ResponseCode)
 }

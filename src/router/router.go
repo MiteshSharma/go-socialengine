@@ -1,12 +1,12 @@
 package router
 
 import (
-	"github.com/julienschmidt/httprouter"
-    "controller"
+	"controller"
+	"controller/objectcomment"
+	"controller/objectdetail"
+	"controller/objectlike"
 	"controller/user"
-    "controller/objectdetail"
-    "controller/objectlike"
-    "controller/objectcomment"
+	"github.com/julienschmidt/httprouter"
 )
 
 func RouteHandler() *httprouter.Router {
@@ -27,7 +27,6 @@ func RouteHandler() *httprouter.Router {
 	m.PUT("/objectcomment/update", objectcomment.Update)
 	m.GET("/objectcomment/read", objectcomment.Read)
 	m.DELETE("/objectcomment/delete", objectcomment.Delete)
-	
+
 	return m
 }
-

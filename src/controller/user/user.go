@@ -2,10 +2,10 @@ package user
 
 import (
 	"github.com/julienschmidt/httprouter"
+	"helper"
+	"middleware"
 	"model/user"
 	"net/http"
-	"middleware"
-	"helper"
 )
 
 func Create(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
