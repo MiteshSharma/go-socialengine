@@ -5,10 +5,10 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"helper"
 	"middleware"
+	"model/channelshareobject"
 	"net/http"
 	"strconv"
 	"strings"
-	"model/channelshareobject"
 )
 
 func Create(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
@@ -68,4 +68,3 @@ func Delete(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		channelshareobject.Delete(channelShareObjectId, userId)
 	}
 }
-

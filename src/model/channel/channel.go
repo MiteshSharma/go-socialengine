@@ -7,22 +7,22 @@ import (
 
 type Channel struct {
 	Id          int       `gorm:"primary_key;auto_increment"  json:"id"`
-	Name   	    string       `sql:"DEFAULT:null" 			  json:"name"`
+	Name        string    `sql:"DEFAULT:null" 			  json:"name"`
 	Description string    `sql:"DEFAULT:null" 				  json:"description"`
 	UserCount   int       `sql:"DEFAULT:0" 				   	  json:"userCount"`
-	OwnerId		int       `sql:"DEFAULT:0" 				   	  json:"ownerId"`
-	CreatedAt  time.Time `json:"createdAt"`
-	UpdatedAt  time.Time `json:"updatedAt"`
+	OwnerId     int       `sql:"DEFAULT:0" 				   	  json:"ownerId"`
+	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
 }
 
 func Create(ownerId int, name, description string) Channel {
 	channel := Channel{
-		Name:   name,
+		Name:        name,
 		Description: description,
-		UserCount:     1,
-		OwnerId: 	ownerId,
-		CreatedAt:  time.Now(),
-		UpdatedAt:  time.Now(),
+		UserCount:   1,
+		OwnerId:     ownerId,
+		CreatedAt:   time.Now(),
+		UpdatedAt:   time.Now(),
 	}
 
 	model.Db.Create(&channel)

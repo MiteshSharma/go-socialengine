@@ -1,14 +1,13 @@
 package channelproperty
 
-
 import (
 	"github.com/gorilla/context"
 	"github.com/julienschmidt/httprouter"
 	"helper"
 	"middleware"
+	"model/channelproperty"
 	"net/http"
 	"strconv"
-	"model/channelproperty"
 )
 
 func Create(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {

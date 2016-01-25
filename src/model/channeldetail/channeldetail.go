@@ -6,16 +6,16 @@ import (
 )
 
 type ChannelDetail struct {
-	UserId       int       `gorm:"primary_key;auto_increment" json:"userId"`
-	ChannelId    int       `sql:"not null" 				   json:"channelId"`
-	CreatedAt  time.Time `json:"createdAt"`
+	UserId    int       `gorm:"primary_key;auto_increment" json:"userId"`
+	ChannelId int       `sql:"not null" 				   json:"channelId"`
+	CreatedAt time.Time `json:"createdAt"`
 }
 
 func Create(userId, channelId int) ChannelDetail {
 	channelDetail := ChannelDetail{
-		UserId:   userId,
+		UserId:    userId,
 		ChannelId: channelId,
-		CreatedAt:  time.Now(),
+		CreatedAt: time.Now(),
 	}
 
 	model.Db.Create(&channelDetail)

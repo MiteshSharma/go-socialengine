@@ -5,11 +5,11 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"helper"
 	"middleware"
+	"model/channel"
+	"model/channeldetail"
 	"net/http"
 	"strconv"
 	"strings"
-	"model/channel"
-	"model/channeldetail"
 )
 
 func Create(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {

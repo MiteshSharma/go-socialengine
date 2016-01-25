@@ -6,14 +6,14 @@ import (
 )
 
 type ChannelShareObject struct {
-	Id       	int       `gorm:"primary_key;auto_increment" json:"id"`
-	UserId      int       `sql:"not null" 				     json:"userId"`
-	ChannelId   int       `sql:"not null" 				     json:"channelId"`
-	ObjectId    int       `sql:"not null" 				     json:"objectId"`
-	ObjectType  string    `sql:"not null" 				     json:"objectType"`
-	Message   	string    `sql:"not null" 				 	 json:"message"`
-	CreatedAt   time.Time `json:"createdAt"`
-	UpdatedAt   time.Time `json:"updatedAt"`
+	Id         int       `gorm:"primary_key;auto_increment" json:"id"`
+	UserId     int       `sql:"not null" 				     json:"userId"`
+	ChannelId  int       `sql:"not null" 				     json:"channelId"`
+	ObjectId   int       `sql:"not null" 				     json:"objectId"`
+	ObjectType string    `sql:"not null" 				     json:"objectType"`
+	Message    string    `sql:"not null" 				 	 json:"message"`
+	CreatedAt  time.Time `json:"createdAt"`
+	UpdatedAt  time.Time `json:"updatedAt"`
 }
 
 func Create(userId, channelId, objectId int, objectType, message string) ChannelShareObject {
@@ -23,7 +23,7 @@ func Create(userId, channelId, objectId int, objectType, message string) Channel
 		ChannelId:  channelId,
 		ObjectId:   objectId,
 		ObjectType: objectType,
-		Message:	message,
+		Message:    message,
 		CreatedAt:  time.Now(),
 		UpdatedAt:  time.Now(),
 	}
@@ -43,13 +43,13 @@ func Update(channelShareObjectId, objectId int, objectType, message string) Chan
 	return channelShareObject
 }
 
-func Read(channelId, userId int) []ChannelShareObject{
+func Read(channelId, userId int) []ChannelShareObject {
 	var channelShareObjects []ChannelShareObject
 	model.Db.Where("channel_id = ? and user_id = ?", channelId, userId).Find(&channelShareObjects)
 	return channelShareObjects
 }
 
-func ReadByChannel(channelId int) []ChannelShareObject{
+func ReadByChannel(channelId int) []ChannelShareObject {
 	var channelShareObjects []ChannelShareObject
 	model.Db.Where("channel_id = ?", channelId).Find(&channelShareObjects)
 	return channelShareObjects
