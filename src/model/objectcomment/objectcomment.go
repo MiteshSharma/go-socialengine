@@ -6,15 +6,15 @@ import (
 )
 
 type ObjectComment struct {
-	Id         int       `gorm:"primary_key;auto_increment" json:"userStatusCommentId"`
+	Id         int       `gorm:"primary_key;auto_increment" json:"id"`
 	ObjectId   int       `sql:"not null" 				   json:"objectId"`
 	ObjectType string    `sql:"not null" 				   json:"objectType"`
-	UserId     int       `sql:"not null" json:"userId"`
-	ParentId   int       `sql:"not null" json:"parentId"`
-	Comment    string    `sql:"not null" json:"comment"`
-	IsDeleted  int       `sql:"DEFAULT:0"`
-	CreatedAt  time.Time `json:"createdAt"`
-	UpdatedAt  time.Time `json:"updatedAt"`
+	UserId     int       `sql:"not null" 				   json:"userId"`
+	ParentId   int       `sql:"not null" 			       json:"parentId"`
+	Comment    string    `sql:"not null" 				   json:"comment"`
+	IsDeleted  int       `sql:"DEFAULT:0"				   json:"-"`
+	CreatedAt  time.Time `json:"createdAt"				   json:"-"`
+	UpdatedAt  time.Time `json:"updatedAt"				   json:"-"`
 }
 
 func Create(userId, objectId, parentCommentId int, comment, objectType string) ObjectComment {

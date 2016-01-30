@@ -8,7 +8,7 @@ import (
 type ChannelDetail struct {
 	UserId    int       `gorm:"primary_key;auto_increment" json:"userId"`
 	ChannelId int       `sql:"not null" 				   json:"channelId"`
-	CreatedAt time.Time `json:"createdAt"`
+	CreatedAt time.Time `json:"createdAt"				   json:"-"`
 }
 
 func Create(userId, channelId int) ChannelDetail {

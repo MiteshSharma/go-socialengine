@@ -4,6 +4,7 @@ import (
 	"github.com/gorilla/context"
 	"github.com/julienschmidt/httprouter"
 	"helper"
+	"encoding/json"
 	"middleware"
 	"model/channel"
 	"model/channeldetail"
@@ -13,11 +14,13 @@ import (
 )
 
 func Create(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	name := r.FormValue("name")
-	description := r.FormValue("description")
+	var ch channel.Channel
+	if err := json.Unmarshal([]byte(r.FormValue("channel")), &ch); err != nil {
+		middleware.Output.ResponseCode = http.StatusBadRequest
+	}
 	userId := context.Get(r, "user_id").(int)
 
-	channel := channel.Create(userId, name, description)
+	channel := channel.Create(ch.OwnerId, ch.Name, ch.Description)
 	channeldetail.Create(userId, channel.Id)
 
 	responseJson, responseCode := helper.GetResponseJson(channel)

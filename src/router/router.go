@@ -19,33 +19,33 @@ func RouteHandler() *httprouter.Router {
 	m.GET("/", controller.MainHandler)
 
 	// User
-	m.POST("/user/create", user.Create)
+	m.POST("/user", user.Create)
 	// Object details
-	m.GET("/objectdetail/read", objectdetail.Read)
+	m.GET("/objectdetail", objectdetail.Read)
 	// Object like calls
-	m.POST("/objectlike/create", objectlike.Create)
-	m.GET("/objectlike/read", objectlike.Read)
-	m.DELETE("/objectlike/delete", objectlike.Delete)
+	m.POST("/objectlike", objectlike.Create)
+	m.GET("/objectlike", objectlike.Read)
+	m.DELETE("/objectlike", objectlike.Delete)
 	// Object comment calls
-	m.POST("/objectcomment/create", objectcomment.Create)
-	m.PUT("/objectcomment/update", objectcomment.Update)
-	m.GET("/objectcomment/read", objectcomment.Read)
-	m.DELETE("/objectcomment/delete", objectcomment.Delete)
+	m.POST("/objectcomment", objectcomment.Create)
+	m.PUT("/objectcomment", objectcomment.Update)
+	m.GET("/objectcomment", objectcomment.Read)
+	m.DELETE("/objectcomment", objectcomment.Delete)
 	// Channel calls
-	m.GET("/channel/create", channel.Create)
-	m.GET("/channel/read", channel.Read)
-	m.GET("/channel/delete", channel.Delete)
+	m.POST("/channel", channel.Create)
+	m.GET("/channel", channel.Read)
+	m.DELETE("/channel", channel.Delete)
 	// Channel detail calls
-	m.GET("/channeldetail/create", channeldetail.Create)
-	m.GET("/channeldetail/read", channeldetail.Read)
-	m.GET("/channeldetail/delete", channeldetail.Delete)
+	m.POST("/channeldetail", channeldetail.Create)
+	m.GET("/channeldetail", channeldetail.Read)
+	m.DELETE("/channeldetail", channeldetail.Delete)
 	// Channel property calls
-	m.GET("/channelproperty/create", channelproperty.Create)
-	m.GET("/channelproperty/update", channelproperty.Update)
-	m.GET("/channelproperty/read", channelproperty.Read)
+	m.POST("/channelproperty", channelproperty.Create)
+	m.PUT("/channelproperty", channelproperty.Update)
+	m.GET("/channelproperty", channelproperty.Read)
 	// Channel share object calls
-	m.GET("/channelshareobject/create", channelshareobject.Create)
-	m.GET("/channelshareobject/read", channelshareobject.Read)
-	m.GET("/channelshareobject/delete", channelshareobject.Delete)
+	m.POST("/channelshareobject", channelshareobject.Create)
+	m.GET("/channelshareobject", channelshareobject.Read)
+	m.DELETE("/channelshareobject", channelshareobject.Delete)
 	return m
 }

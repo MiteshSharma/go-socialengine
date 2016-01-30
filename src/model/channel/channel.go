@@ -6,13 +6,13 @@ import (
 )
 
 type Channel struct {
-	Id          int       `gorm:"primary_key;auto_increment"  json:"id"`
-	Name        string    `sql:"DEFAULT:null" 			  json:"name"`
-	Description string    `sql:"DEFAULT:null" 				  json:"description"`
-	UserCount   int       `sql:"DEFAULT:0" 				   	  json:"userCount"`
-	OwnerId     int       `sql:"DEFAULT:0" 				   	  json:"ownerId"`
-	CreatedAt   time.Time `json:"createdAt"`
-	UpdatedAt   time.Time `json:"updatedAt"`
+	Id          int       `gorm:"primary_key;auto_increment" json:"id"`
+	Name        string    `sql:"not null" json:"name"`
+	Description string    `json:"description"`
+	UserCount   int       `sql:"DEFAULT:0" json:"userCount"`
+	OwnerId     int       `sql:"DEFAULT:0" json:"ownerId"`
+	CreatedAt   time.Time `json:"-"`
+	UpdatedAt   time.Time `json:"-"`
 }
 
 func Create(ownerId int, name, description string) Channel {

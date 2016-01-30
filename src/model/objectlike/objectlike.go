@@ -10,9 +10,9 @@ type ObjectLike struct {
 	ObjectId   int       `sql:"not null" 				   json:"objectId"`
 	ObjectType string    `sql:"not null" 				   json:"objectType"`
 	UserId     int       `sql:"not null" 				   json:"userId"`
-	IsDeleted  int       `sql:"DEFAULT:0"`
-	CreatedAt  time.Time `json:"createdAt"`
-	UpdatedAt  time.Time `json:"updatedAt"`
+	IsDeleted  int       `sql:"DEFAULT:0"				   json:"-"`
+	CreatedAt  time.Time `json:"createdAt"				   json:"-"`
+	UpdatedAt  time.Time `json:"updatedAt"				   json:"-"`
 }
 
 func Create(userId, objectId int, objectType string) ObjectLike {

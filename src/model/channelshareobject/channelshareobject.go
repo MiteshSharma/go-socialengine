@@ -12,8 +12,8 @@ type ChannelShareObject struct {
 	ObjectId   int       `sql:"not null" 				     json:"objectId"`
 	ObjectType string    `sql:"not null" 				     json:"objectType"`
 	Message    string    `sql:"not null" 				 	 json:"message"`
-	CreatedAt  time.Time `json:"createdAt"`
-	UpdatedAt  time.Time `json:"updatedAt"`
+	CreatedAt  time.Time `json:"createdAt"					 json:"-"`
+	UpdatedAt  time.Time `json:"updatedAt"					 json:"-"`
 }
 
 func Create(userId, channelId, objectId int, objectType, message string) ChannelShareObject {

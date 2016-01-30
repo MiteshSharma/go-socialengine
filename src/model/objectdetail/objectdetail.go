@@ -12,8 +12,8 @@ type ObjectDetail struct {
 	ObjectType     string                        `gorm:"primary_key" json:"objectType"`
 	LikesCount     int                           `sql:"DEFAULT:0" 	json:"likeCount"`
 	CommentCount   int                           `sql:"DEFAULT:0" 	json:"commentCount"`
-	CreatedAt      time.Time                     `json:"createdAt"`
-	UpdatedAt      time.Time                     `json:"updatedAt"`
+	CreatedAt      time.Time                     `json:"-"`
+	UpdatedAt      time.Time                     `json:"-"`
 	objectLikes    []objectlike.ObjectLike       `json:"objectLikes"`    // One-To-Many relationship (has many)
 	objectComments []objectcomment.ObjectComment `json:"objectComments"` // One-To-Many relationship (has many)
 }

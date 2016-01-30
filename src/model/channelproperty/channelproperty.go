@@ -10,9 +10,9 @@ type ChannelProperty struct {
 	ChannelId int       `sql:"not null" 				     json:"channelId"`
 	UserId    int       `sql:"not null" 				     json:"userId"`
 	Name      string    `sql:"not null" 				 	 json:"name"`
-	Value     string    `sql:"default: null" 				     json:"value"`
-	CreatedAt time.Time `json:"createdAt"`
-	UpdatedAt time.Time `json:"updatedAt"`
+	Value     string    `sql:"default: null" 				 json:"value"`
+	CreatedAt time.Time `json:"createdAt"					 json:"-"`
+	UpdatedAt time.Time `json:"updatedAt"					 json:"-"`
 }
 
 func Create(channelId, userId int, name, value string) ChannelProperty {
